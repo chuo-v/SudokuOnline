@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+		<title>Sudoku Online</title>
+		<link href="css/online_sudoku.css" rel="stylesheet" type="text/css">
+	</head>
+
+	<body>
+		<div id="all">
+			<div id="navigation_panel_wrapper">
+				<div id="navigation_menu">
+					<div id="home" class="navigation_panel_button">H</div>
+					<div id="level_1" class="navigation_panel_button">1</div>
+					<div id="level_2" class="navigation_panel_button">2</div>
+					<div id="level_3" class="navigation_panel_button">3</div>
+					<div id="level_4" class="navigation_panel_button">4</div>
+					<div id="level_5" class="navigation_panel_button">5</div>
+					<div id="level_6" class="navigation_panel_button">6</div>
+					<div id="level_7" class="navigation_panel_button">7</div>
+					<div id="level_8" class="navigation_panel_button">8</div>
+					<div id="level_9" class="navigation_panel_button">9</div>
+					<div id="level_10" class="navigation_panel_button">10</div>
+					<div id="level_11" class="navigation_panel_button">11</div>
+					<div id="level_12" class="navigation_panel_button">12</div>
+					<div id="level_13" class="navigation_panel_button">13</div>
+					<div id="level_14" class="navigation_panel_button">14</div>
+					<div id="level_15" class="navigation_panel_button">15</div>
+					<div id="level_16" class="navigation_panel_button">16</div>
+					<div id="level_17" class="navigation_panel_button">17</div>
+					<div id="level_18" class="navigation_panel_button">18</div>
+					<div id="level_19" class="navigation_panel_button">19</div>
+					<div id="level_20" class="navigation_panel_button">20</div>
+					<div id="level_21" class="navigation_panel_button">21</div>
+					<div id="level_22" class="navigation_panel_button">22</div>
+					<div id="level_23" class="navigation_panel_button">23</div>
+					<div id="level_24" class="navigation_panel_button">24</div>
+					<div id="level_25" class="navigation_panel_button">25</div>
+					<div id="level_26" class="navigation_panel_button">26</div>
+					<div id="level_27" class="navigation_panel_button">27</div>
+					<div id="level_28" class="navigation_panel_button">28</div>
+					<div id="level_29" class="navigation_panel_button">29</div>
+					<div id="level_30" class="navigation_panel_button">30</div>
+				</div>
+			</div>
+
+			<div id="loading_div">
+				<div id="loading_div_content"></div>
+			</div>
+
+			<div id="home_page">
+				<div id="home_page_title">Sudoku Online</div>
+			</div>
+
+			<div id="game_board_area">
+
+				<div id="game_board">
+					<div id="game_board_tile_1_1" class="game_board_tile_row_1 game_board_tile_column_1 game_board_tile_square_1 game_board_tile">
+						<div id="game_board_piece_1_1" class="game_board_piece"></div>
+					</div>
+					<div id="game_board_tile_1_2" class="game_board_tile_row_1 game_board_tile_column_2 game_board_tile_square_1 game_board_tile">
+						<div id="game_board_piece_1_2" class="game_board_piece"></div>
+					</div>
+					<div id="game_board_tile_1_3" class="game_board_tile_row_1 game_board_tile_column_3 game_board_tile_square_1 game_board_tile">
+						<div id="game_board_piece_1_3" class="game_board_piece"></div>
+					</div>
+					<div id="game_board_tile_1_4" class="game_board_tile_row_1 game_board_tile_column_4 game_board_tile_square_2 game_board_tile">
+						<div id="game_board_piece_1_4" class="game_board_piece"></div>
+					</div>
+					<div id="game_board_tile_1_5" class="game_board_tile_row_1 game_board_tile_column_5 game_board_tile_square_2 game_board_tile">
+						<div id="game_board_piece_1_5" class="game_board_piece"></div>
+					</div>
+					<div id="game_board_tile_1_6" class="game_board_tile_row_1 game_board_tile_column_6 game_board_tile_square_2 game_board_tile">
+						<div id="game_board_piece_1_6" class="game_board_piece"></div>
+					</div>
+					<div id="game_board_tile_1_7" class="game_board_tile_row_1 game_board_tile_column_7 game_board_tile_square_3 game_board_tile">
+						<div id="game_board_piece_1_7" class="game_board_piece"></div>
+					</div>
+					<div id="game_board_tile_1_8" class="game_board_tile_row_1 game_board_tile_column_8 game_board_tile_square_3 game_board_tile">
+						<div id="game_board_piece_1_8" class="game_board_piece"></div>
+					</div>
+					<div id="game_board_tile_1_9" class="game_board_tile_row_1 game_board_tile_column_9 game_board_tile_square_3 game_board_tile">
+						<div id="game_board_piece_1_9" class="game_board_piece"></div>
+					</div>
+					
+					<div id="game_board_tile_2_1" class="game_board_tile_row_2 game_board_tile_column_1 game_board_tile_square_1 game_board_tile">
+						<div id="game_board_piece_2_1" class="game_board_piece"></div>
+					</div>
+					<div id="game_board_tile_2_2" class="game_board_tile_row_2 game_board_tile_column_2 game_board_tile_square_1 game_board_tile">
+						<div id="game_board_piece_2_2" class="game_board_piece"></div>
+					</div>
+					<div id="game_board_tile_2_3" class="game_board_tile_row_2 game_board_tile_column_3 game_board_tile_square_1 game_board_tile">
+						<div id="game_board_piece_2_3" class="game_board_piece"></div>
+					</div>
+					<div id="game_board_tile_2_4" class="game_board_tile_row_2 game_board_tile_column_4 game_board_tile_square_2 game_board_tile">
+						<div id="game_board_piece_2_4" class="game_board_piece"></div>
+					</div>
+					<div id="game_board_tile_2_5" class="game_board_tile_row_2 game_board_tile_column_5 game_board_tile_square_2 game_board_tile">
+						<div id="game_board_piece_2_5" class="game_board_piece"></div>
+					</div>
+					<div id="game_board_tile_2_6" class="game_board_tile_row_2 game_board_tile_column_6 game_board_tile_square_2 game_board_tile">
+						<div id="game_board_piece_2_6" class="game_board_piece"></div>
+					</div>
+					<div id="game_board_tile_2_7" class="game_board_tile_row_2 game_board_tile_column_7 game_board_tile_square_3 game_board_tile">
+						<div id="game_board_piece_2_7" class="game_board_piece"></div>
+					</div>
+					<div id="game_board_tile_2_8" class="game_board_tile_row_2 game_board_tile_column_8 game_board_tile_square_3 game_board_tile">
+						<div id="game_board_piece_2_8" class="game_board_piece"></div>
+					</div>
+					<div id="game_board_tile_2_9" class="game_board_tile_row_2 game_board_tile_column_9 game_board_tile_square_3 game_board_tile">
+						<div id="game_board_piece_2_9" class="game_board_piece"></div>
+					</div>
+					
+					<div id="game_board_tile_3_1" class="game_board_tile_row_3 game_board_tile_column_1 game_board_tile_square_2 game_board_tile_square_1 game_board_tile">
+						<div id="game_board_piece_3_1" class="game_board_piece"></div>
+					</div>
+					<div id="game_board_tile_3_2" class="game_board_tile_row_3 game_board_tile_column_2 game_board_tile_square_2 game_board_tile_square_1 game_board_tile">
+						<div id="game_board_piece_3_2" class="game_board_piece"></div>
+					</div>
+					<div id="game_board_tile_3_3" class="game_board_tile_row_3 game_board_tile_column_3 game_board_tile_square_2 game_board_tile_square_1 game_board_tile">
+						<div id="game_board_piece_3_3" class="game_board_piece"></div>
+					</div>
+					<div id="game_board_tile_3_4" class="game_board_tile_row_3 game_board_tile_column_4 game_board_tile">
+						<div id="game_board_piece_3_4" class="game_board_piece"></div>
+					</div>
+					<div id="game_board_tile_3_5" class="game_board_tile_row_3 game_board_tile_column_5 game_board_tile">
+						<div id="game_board_piece_3_5" class="game_board_piece"></div>
+					</div>
+					<div id="game_board_tile_3_6" class="game_board_tile_row_3 game_board_tile_column_6 game_board_tile">
+						<div id="game_board_piece_3_6" class="game_board_piece"></div>
+					</div>
+					<div id="game_board_tile_3_7" class="game_board_tile_row_3 game_board_tile_column_7 game_board_tile_square_3 game_board_tile">
+						<div id="game_board_piece_3_7" class="game_board_piece"></div>
+					</div>
+					<div id="game_board_tile_3_8" class="game_board_tile_row_3 game_board_tile_column_8 game_board_tile_square_3 game_board_tile">
+						<div id="game_board_piece_3_8" class="game_board_piece"></div>
+					</div>
+					<div id="game_board_tile_3_9" class="game_board_tile_row_3 game_board_tile_column_9 game_board_tile_square_3 game_board_tile">
+						<div id="game_board_piece_3_9" class="game_board_piece"></div>
+					</div>
+
+					<div id="game_board_tile_4_1" class="game_board_tile_row_4 game_board_tile_column_1 game_board_tile_square_4 game_board_tile">
+						<div id="game_board_piece_4_1" class="game_board_piece"></div>
+					</div>
+					<div id="game_board_tile_4_2" class="game_board_tile_row_4 game_board_tile_column_2 game_board_tile_square_4 game_board_tile">
+						<div id="game_board_piece_4_2" class="game_board_piece"></div>
+					</div>
+					<div id="game_board_tile_4_3" class="game_board_tile_row_4 game_board_tile_column_3 game_board_tile_square_4 game_board_tile">
+						<div id="game_board_piece_4_3" class="game_board_piece"></div>
+					</div>
+					<div id="game_board_tile_4_4" class="game_board_tile_row_4 game_board_tile_column_4 game_board_tile_square_5 game_board_tile">
+						<div id="game_board_piece_4_4" class="game_board_piece"></div>
+					</div>
+					<div id="game_board_tile_4_5" class="game_board_tile_row_4 game_board_tile_column_5 game_board_tile_square_5 game_board_tile">
+						<div id="game_board_piece_4_5" class="game_board_piece"></div>
+					</div>
+					<div id="game_board_tile_4_6" class="game_board_tile_row_4 game_board_tile_column_6 game_board_tile_square_5 game_board_tile">
+						<div id="game_board_piece_4_6" class="game_board_piece"></div>
+					</div>
+					<div id="game_board_tile_4_7" class="game_board_tile_row_4 game_board_tile_column_7 game_board_tile_square_6 game_board_tile">
+						<div id="game_board_piece_4_7" class="game_board_piece"></div>
+					</div>
+					<div id="game_board_tile_4_8" class="game_board_tile_row_4 game_board_tile_column_8 game_board_tile_square_6 game_board_tile">
+						<div id="game_board_piece_4_8" class="game_board_piece"></div>
+					</div>
+					<div id="game_board_tile_4_9" class="game_board_tile_row_4 game_board_tile_column_9 game_board_tile_square_6 game_board_tile">
+						<div id="game_board_piece_4_9" class="game_board_piece"></div>
+					</div>
+
+					<div id="game_board_tile_5_1" class="game_board_tile_row_5 game_board_tile_column_1 game_board_tile_square_4 game_board_tile">
+						<div id="game_board_piece_5_1" class="game_board_piece"></div>
+					</div>
+					<div id="game_board_tile_5_2" class="game_board_tile_row_5 game_board_tile_column_2 game_board_tile_square_4 game_board_tile">
+						<div id="game_board_piece_5_2" class="game_board_piece"></div>
+					</div>
+					<div id="game_board_tile_5_3" class="game_board_tile_row_5 game_board_tile_column_3 game_board_tile_square_4 game_board_tile">
+						<div id="game_board_piece_5_3" class="game_board_piece"></div>
+					</div>
+					<div id="game_board_tile_5_4" class="game_board_tile_row_5 game_board_tile_column_4 game_board_tile_square_5 game_board_tile">
+						<div id="game_board_piece_5_4" class="game_board_piece"></div>
+					</div>
+					<div id="game_board_tile_5_5" class="game_board_tile_row_5 game_board_tile_column_5 game_board_tile_square_5 game_board_tile">
+						<div id="game_board_piece_5_5" class="game_board_piece"></div>
+					</div>
+					<div id="game_board_tile_5_6" class="game_board_tile_row_5 game_board_tile_column_6 game_board_tile_square_5 game_board_tile">
+						<div id="game_board_piece_5_6" class="game_board_piece"></div>
+					</div>
+					<div id="game_board_tile_5_7" class="game_board_tile_row_5 game_board_tile_column_7 game_board_tile_square_6 game_board_tile">
+						<div id="game_board_piece_5_7" class="game_board_piece"></div>
+					</div>
+					<div id="game_board_tile_5_8" class="game_board_tile_row_5 game_board_tile_column_8 game_board_tile_square_6 game_board_tile">
+						<div id="game_board_piece_5_8" class="game_board_piece"></div>
+					</div>
+					<div id="game_board_tile_5_9" class="game_board_tile_row_5 game_board_tile_column_9 game_board_tile_square_6 game_board_tile">
+						<div id="game_board_piece_5_9" class="game_board_piece"></div>
+					</div>
+
+					<div id="game_board_tile_6_1" class="game_board_tile_row_6 game_board_tile_column_1 game_board_tile_square_4 game_board_tile">
+						<div id="game_board_piece_6_1" class="game_board_piece"></div>
+					</div>
+					<div id="game_board_tile_6_2" class="game_board_tile_row_6 game_board_tile_column_2 game_board_tile_square_4 game_board_tile">
+						<div id="game_board_piece_6_2" class="game_board_piece"></div>
+					</div>
+					<div id="game_board_tile_6_3" class="game_board_tile_row_6 game_board_tile_column_3 game_board_tile_square_4 game_board_tile">
+						<div id="game_board_piece_6_3" class="game_board_piece"></div>
+					</div>
+					<div id="game_board_tile_6_4" class="game_board_tile_row_6 game_board_tile_column_4 game_board_tile_square_5 game_board_tile">
+						<div id="game_board_piece_6_4" class="game_board_piece"></div>
+					</div>
+					<div id="game_board_tile_6_5" class="game_board_tile_row_6 game_board_tile_column_5 game_board_tile_square_5 game_board_tile">
+						<div id="game_board_piece_6_5" class="game_board_piece"></div>
+					</div>
+					<div id="game_board_tile_6_6" class="game_board_tile_row_6 game_board_tile_column_6 game_board_tile_square_5 game_board_tile">
+						<div id="game_board_piece_6_6" class="game_board_piece"></div>
+					</div>
+					<div id="game_board_tile_6_7" class="game_board_tile_row_6 game_board_tile_column_7 game_board_tile_square_6 game_board_tile">
+						<div id="game_board_piece_6_7" class="game_board_piece"></div>
+					</div>
+					<div id="game_board_tile_6_8" class="game_board_tile_row_6 game_board_tile_column_8 game_board_tile_square_6 game_board_tile">
+						<div id="game_board_piece_6_8" class="game_board_piece"></div>
+					</div>
+					<div id="game_board_tile_6_9" class="game_board_tile_row_6 game_board_tile_column_9 game_board_tile_square_6 game_board_tile">
+						<div id="game_board_piece_6_9" class="game_board_piece"></div>
+					</div>
+
+					<div id="game_board_tile_7_1" class="game_board_tile_row_7 game_board_tile_column_1 game_board_tile_square_7 game_board_tile">
+						<div id="game_board_piece_7_1" class="game_board_piece"></div>
+					</div>
+					<div id="game_board_tile_7_2" class="game_board_tile_row_7 game_board_tile_column_2 game_board_tile_square_7 game_board_tile">
+						<div id="game_board_piece_7_2" class="game_board_piece"></div>
+					</div>
+					<div id="game_board_tile_7_3" class="game_board_tile_row_7 game_board_tile_column_3 game_board_tile_square_7 game_board_tile">
+						<div id="game_board_piece_7_3" class="game_board_piece"></div>
+					</div>
+					<div id="game_board_tile_7_4" class="game_board_tile_row_7 game_board_tile_column_4 game_board_tile_square_8 game_board_tile">
+						<div id="game_board_piece_7_4" class="game_board_piece"></div>
+					</div>
+					<div id="game_board_tile_7_5" class="game_board_tile_row_7 game_board_tile_column_5 game_board_tile_square_8 game_board_tile">
+						<div id="game_board_piece_7_5" class="game_board_piece"></div>
+					</div>
+					<div id="game_board_tile_7_6" class="game_board_tile_row_7 game_board_tile_column_6 game_board_tile_square_8 game_board_tile">
+						<div id="game_board_piece_7_6" class="game_board_piece"></div>
+					</div>
+					<div id="game_board_tile_7_7" class="game_board_tile_row_7 game_board_tile_column_7 game_board_tile_square_9 game_board_tile">
+						<div id="game_board_piece_7_7" class="game_board_piece"></div>
+					</div>
+					<div id="game_board_tile_7_8" class="game_board_tile_row_7 game_board_tile_column_8 game_board_tile_square_9 game_board_tile">
+						<div id="game_board_piece_7_8" class="game_board_piece"></div>
+					</div>
+					<div id="game_board_tile_7_9" class="game_board_tile_row_7 game_board_tile_column_9 game_board_tile_square_9 game_board_tile">
+						<div id="game_board_piece_7_9" class="game_board_piece"></div>
+					</div>
+
+					<div id="game_board_tile_8_1" class="game_board_tile_row_8 game_board_tile_column_1 game_board_tile_square_7 game_board_tile">
+						<div id="game_board_piece_8_1" class="game_board_piece"></div>
+					</div>
+					<div id="game_board_tile_8_2" class="game_board_tile_row_8 game_board_tile_column_2 game_board_tile_square_7 game_board_tile">
+						<div id="game_board_piece_8_2" class="game_board_piece"></div>
+					</div>
+					<div id="game_board_tile_8_3" class="game_board_tile_row_8 game_board_tile_column_3 game_board_tile_square_7 game_board_tile">
+						<div id="game_board_piece_8_3" class="game_board_piece"></div>
+					</div>
+					<div id="game_board_tile_8_4" class="game_board_tile_row_8 game_board_tile_column_4 game_board_tile_square_8 game_board_tile">
+						<div id="game_board_piece_8_4" class="game_board_piece"></div>
+					</div>
+					<div id="game_board_tile_8_5" class="game_board_tile_row_8 game_board_tile_column_5 game_board_tile_square_8 game_board_tile">
+						<div id="game_board_piece_8_5" class="game_board_piece"></div>
+					</div>
+					<div id="game_board_tile_8_6" class="game_board_tile_row_8 game_board_tile_column_6 game_board_tile_square_8 game_board_tile">
+						<div id="game_board_piece_8_6" class="game_board_piece"></div>
+					</div>
+					<div id="game_board_tile_8_7" class="game_board_tile_row_8 game_board_tile_column_7 game_board_tile_square_9 game_board_tile">
+						<div id="game_board_piece_8_7" class="game_board_piece"></div>
+					</div>
+					<div id="game_board_tile_8_8" class="game_board_tile_row_8 game_board_tile_column_8 game_board_tile_square_9 game_board_tile">
+						<div id="game_board_piece_8_8" class="game_board_piece"></div>
+					</div>
+					<div id="game_board_tile_8_9" class="game_board_tile_row_8 game_board_tile_column_9 game_board_tile_square_9 game_board_tile">
+						<div id="game_board_piece_8_9" class="game_board_piece"></div>
+					</div>
+
+					<div id="game_board_tile_9_1" class="game_board_tile_row_9 game_board_tile_column_1 game_board_tile_square_7 game_board_tile">
+						<div id="game_board_piece_9_1" class="game_board_piece"></div>
+					</div>
+					<div id="game_board_tile_9_2" class="game_board_tile_row_9 game_board_tile_column_2 game_board_tile_square_7 game_board_tile">
+						<div id="game_board_piece_9_2" class="game_board_piece"></div>
+					</div>
+					<div id="game_board_tile_9_3" class="game_board_tile_row_9 game_board_tile_column_3 game_board_tile_square_7 game_board_tile">
+						<div id="game_board_piece_9_3" class="game_board_piece"></div>
+					</div>
+					<div id="game_board_tile_9_4" class="game_board_tile_row_9 game_board_tile_column_4 game_board_tile_square_8 game_board_tile">
+						<div id="game_board_piece_9_4" class="game_board_piece"></div>
+					</div>
+					<div id="game_board_tile_9_5" class="game_board_tile_row_9 game_board_tile_column_5 game_board_tile_square_8 game_board_tile">
+						<div id="game_board_piece_9_5" class="game_board_piece"></div>
+					</div>
+					<div id="game_board_tile_9_6" class="game_board_tile_row_9 game_board_tile_column_6 game_board_tile_square_8 game_board_tile">
+						<div id="game_board_piece_9_6" class="game_board_piece"></div>
+					</div>
+					<div id="game_board_tile_9_7" class="game_board_tile_row_9 game_board_tile_column_7 game_board_tile_square_9 game_board_tile">
+						<div id="game_board_piece_9_7" class="game_board_piece"></div>
+					</div>
+					<div id="game_board_tile_9_8" class="game_board_tile_row_9 game_board_tile_column_8 game_board_tile_square_9 game_board_tile">
+						<div id="game_board_piece_9_8" class="game_board_piece"></div>
+					</div>
+					<div id="game_board_tile_9_9" class="game_board_tile_row_9 game_board_tile_column_9 game_board_tile_square_9 game_board_tile">
+						<div id="game_board_piece_9_9" class="game_board_piece"></div>
+					</div>
+
+				</div>
+
+				<div id="unused_number_pieces_panel">
+					<div class="unused_number_piece_container">
+						<div class="unused_number_piece_tile">
+							<div id="unused_number_piece_1" class="unused_number_piece">1</div>
+						</div>
+						<div id="unused_number_piece_1_counter" class="unused_number_piece_counter"></div>
+					</div>
+					<div class="unused_number_piece_container">
+						<div class="unused_number_piece_tile">
+							<div id="unused_number_piece_2" class="unused_number_piece">2</div>
+						</div>
+						<div id="unused_number_piece_2_counter" class="unused_number_piece_counter"></div>
+					</div>
+					<div class="unused_number_piece_container">
+						<div class="unused_number_piece_tile">
+							<div id="unused_number_piece_3" class="unused_number_piece">3</div>
+						</div>
+						<div id="unused_number_piece_3_counter" class="unused_number_piece_counter"></div>
+					</div>
+					<div class="unused_number_piece_container">
+						<div class="unused_number_piece_tile">
+							<div id="unused_number_piece_4" class="unused_number_piece">4</div>
+						</div>
+						<div id="unused_number_piece_4_counter" class="unused_number_piece_counter"></div>
+					</div>
+					<div class="unused_number_piece_container">
+						<div class="unused_number_piece_tile">
+							<div id="unused_number_piece_5" class="unused_number_piece">5</div>
+						</div>
+						<div id="unused_number_piece_5_counter" class="unused_number_piece_counter"></div>
+					</div>
+					<div class="unused_number_piece_container">
+						<div class="unused_number_piece_tile">
+							<div id="unused_number_piece_6" class="unused_number_piece">6</div>
+						</div>
+						<div id="unused_number_piece_6_counter" class="unused_number_piece_counter"></div>
+					</div>
+					<div class="unused_number_piece_container">
+						<div class="unused_number_piece_tile">
+							<div id="unused_number_piece_7" class="unused_number_piece">7</div>
+						</div>
+						<div id="unused_number_piece_7_counter" class="unused_number_piece_counter"></div>
+					</div>
+					<div class="unused_number_piece_container">
+						<div class="unused_number_piece_tile">
+							<div id="unused_number_piece_8" class="unused_number_piece">8</div>
+						</div>
+						<div id="unused_number_piece_8_counter" class="unused_number_piece_counter"></div>
+					</div>
+					<div class="unused_number_piece_container">
+						<div class="unused_number_piece_tile">
+							<div id="unused_number_piece_9" class="unused_number_piece">9</div>
+						</div>
+						<div id="unused_number_piece_9_counter" class="unused_number_piece_counter"></div>
+					</div>
+				</div>
+
+				<div id="clear_board_button">Clear<br>Board</div>
+
+				<div id="information_box">
+					<div class="information_box_title">Actions</div>
+					<div class="information_box_action">Drag</div>
+					<div class="information_box_action_description">To fill a sudoku tile with a number, drag any of the number pieces on the panel to the right of the game board on to an empty tile. Dropping a number piece on a tile occupied by a previously used number piece will replace it.</div>
+					<div class="information_box_action">Double Click</div>
+					<div class="information_box_action_description">To remove a number from a sudoku tile, double click on the number piece.</div>
+					<div class="information_box_title">Objects</div>
+					<div class="information_box_object">Given Numbers</div>
+					<div class="information_box_object_description">Given numbers are gray colored, and cannot be altered.</div>
+					<div class="information_box_object">Number Pieces</div>
+					<div class="information_box_object_description">Number pieces have green backgrounds and can be placed on sudoku tiles not occupied by a given number. A counter for the remaining number of times you can use a number piece is displayed to the right of each of the number pieces.</div>
+				</div>
+
+				<div id="draggable_unused_number_piece_1" class="draggable_unused_number_piece">1</div>
+				<div id="draggable_unused_number_piece_2" class="draggable_unused_number_piece">2</div>
+				<div id="draggable_unused_number_piece_3" class="draggable_unused_number_piece">3</div>
+				<div id="draggable_unused_number_piece_4" class="draggable_unused_number_piece">4</div>
+				<div id="draggable_unused_number_piece_5" class="draggable_unused_number_piece">5</div>
+				<div id="draggable_unused_number_piece_6" class="draggable_unused_number_piece">6</div>
+				<div id="draggable_unused_number_piece_7" class="draggable_unused_number_piece">7</div>
+				<div id="draggable_unused_number_piece_8" class="draggable_unused_number_piece">8</div>
+				<div id="draggable_unused_number_piece_9" class="draggable_unused_number_piece">9</div>
+
+			</div>
+
+			<div id="level_completed_msgbox_wrapper">
+				<div id="level_completed_msgbox">
+					<div id="level_completed_msgbox_content">Congratulations! You have cleared this level!</div>
+				</div>
+			</div>
+		</div>
+		
+		<script src="libs/jquery.js"></script>
+		<script src="libs/jquery.slimscroll.min.js"></script>
+		<script src="libs/online_sudoku.js"></script>
+	</body>
+</html>
