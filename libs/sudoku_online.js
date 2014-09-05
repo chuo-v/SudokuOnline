@@ -298,6 +298,22 @@ VernonChuo.SudokuOnline = function()
 					return [0,0,7,0,1,0,0,0,0,0,1,6,5,0,9,4,7,8,0,8,5,4,3,0,9,1,0,6,0,8,7,0,2,0,9,1,5,7,0,9,0,8,2,4,3,9,0,0,3,0,0,0,0,0,8,5,0,0,7,0,0,6,0,0,6,0,0,0,5,8,0,0,0,2,0,0,0,4,0,0,5];
 				case "level_2":
 					return [8,0,0,0,1,6,0,0,5,5,0,4,0,0,0,0,0,0,1,6,0,2,0,4,0,3,0,0,2,5,0,0,9,7,0,1,0,0,0,5,0,1,0,0,0,6,0,1,3,0,0,4,5,0,0,1,0,8,0,7,0,2,3,0,0,0,0,0,0,6,0,4,9,0,0,4,6,0,0,0,8];
+				case "level_3":
+					return [0,3,0,0,7,1,0,0,0,8,0,2,0,0,9,0,0,6,0,0,0,0,2,0,4,0,3,2,0,7,0,0,3,0,8,0,9,1,0,0,0,0,5,3,0,0,0,0,4,1,7,0,6,0,0,4,0,9,0,0,0,7,0,0,0,0,1,8,0,3,0,0,0,9,1,7,0,0,0,0,5];
+				case "level_4":
+					return [5,6,0,0,9,0,0,3,8,4,0,7,0,3,0,2,0,5,3,0,0,0,0,0,0,0,6,1,3,0,5,0,2,0,8,9,0,0,0,0,8,0,0,0,0,8,9,6,0,1,0,5,2,3,0,1,0,0,0,0,0,5,0,7,0,0,9,2,5,0,0,1,0,5,8,6,7,1,3,4,0];
+				case "level_5":
+					return [2,4,0,0,7,9,0,0,1,0,0,9,5,8,0,0,7,4,0,0,8,0,0,0,2,0,0,0,8,0,0,0,6,0,0,9,6,0,0,0,0,0,0,0,8,7,0,0,1,0,0,0,2,0,0,0,4,0,0,0,9,0,0,8,2,0,0,9,1,5,0,0,9,0,0,4,6,0,0,1,2];
+				case "level_6":
+					return [0,0,2,0,3,0,0,0,0,4,8,9,0,0,1,7,0,3,0,0,1,0,2,8,0,0,6,0,3,0,8,0,0,0,1,4,0,0,4,1,9,0,2,0,0,0,1,8,0,4,3,0,7,0,0,9,0,3,1,2,0,0,0,8,2,0,5,0,4,0,0,0,1,4,7,9,8,0,3,0,2];
+				case "level_7":
+					return [0,2,8,4,0,1,0,0,9,5,1,4,8,0,0,7,0,3,0,0,7,0,0,0,8,0,4,2,0,5,0,1,0,4,0,8,8,0,6,0,3,0,0,9,1,0,3,0,0,8,0,2,7,6,0,5,9,6,0,7,3,0,2,0,4,0,0,0,0,1,6,0,0,0,0,0,5,2,0,0,0];
+				case "level_8":
+					return [0,0,0,0,7,0,0,0,0,4,3,6,0,9,1,0,0,0,0,7,0,6,0,2,0,5,9,6,0,4,0,8,0,0,0,0,7,0,0,0,1,0,0,0,6,3,0,0,0,0,4,5,7,0,1,6,0,0,0,0,0,0,0,2,0,0,1,0,6,0,3,5,0,4,0,0,0,0,8,0,0];
+				case "level_9":
+					return [0,3,9,0,0,0,8,0,0,6,1,0,0,0,7,0,9,5,0,5,8,0,0,0,0,7,0,5,0,0,7,0,8,1,0,3,0,0,0,4,6,2,9,5,7,2,0,0,0,0,0,0,0,0,0,0,0,0,0,5,0,0,9,0,0,0,0,0,0,0,3,0,9,0,6,0,0,0,5,0,4];
+				case "level_10":
+					return [0,5,8,0,0,6,0,3,0,4,2,0,5,0,8,9,7,6,9,3,0,0,0,0,0,0,0,0,0,0,0,0,0,3,0,0,0,4,0,0,0,2,0,8,0,0,0,0,0,0,0,1,0,0,0,0,4,0,0,0,0,0,0,2,1,3,7,5,0,8,0,0,0,8,7,0,1,0,5,0,3];
 				default:
 					break;
 			}
@@ -395,14 +411,14 @@ VernonChuo.SudokuOnline = function()
 	{
 		var used_number_pieces_arr_for_level_1 = [0,0,7,0,1,0,0,0,0,0,1,6,5,0,9,4,7,8,0,8,5,4,3,0,9,1,0,6,0,8,7,0,2,0,9,1,5,7,0,9,0,8,2,4,3,9,0,0,3,0,0,0,0,0,8,5,0,0,7,0,0,6,0,0,6,0,0,0,5,8,0,0,0,2,0,0,0,4,0,0,5],
 			used_number_pieces_arr_for_level_2 = [8,0,0,0,1,6,0,0,5,5,0,4,0,0,0,0,0,0,1,6,0,2,0,4,0,3,0,0,2,5,0,0,9,7,0,1,0,0,0,5,0,1,0,0,0,6,0,1,3,0,0,4,5,0,0,1,0,8,0,7,0,2,3,0,0,0,0,0,0,6,0,4,9,0,0,4,6,0,0,0,8],
-			used_number_pieces_arr_for_level_3 = [],
-			used_number_pieces_arr_for_level_4 = [],
-			used_number_pieces_arr_for_level_5 = [],
-			used_number_pieces_arr_for_level_6 = [],
-			used_number_pieces_arr_for_level_7 = [],
-			used_number_pieces_arr_for_level_8 = [],
-			used_number_pieces_arr_for_level_9 = [],
-			used_number_pieces_arr_for_level_10 = [],
+			used_number_pieces_arr_for_level_3 = [0,3,0,0,7,1,0,0,0,8,0,2,0,0,9,0,0,6,0,0,0,0,2,0,4,0,3,2,0,7,0,0,3,0,8,0,9,1,0,0,0,0,5,3,0,0,0,0,4,1,7,0,6,0,0,4,0,9,0,0,0,7,0,0,0,0,1,8,0,3,0,0,0,9,1,7,0,0,0,0,5],
+			used_number_pieces_arr_for_level_4 = [5,6,0,0,9,0,0,3,8,4,0,7,0,3,0,2,0,5,3,0,0,0,0,0,0,0,6,1,3,0,5,0,2,0,8,9,0,0,0,0,8,0,0,0,0,8,9,6,0,1,0,5,2,3,0,1,0,0,0,0,0,5,0,7,0,0,9,2,5,0,0,1,0,5,8,6,7,1,3,4,0],
+			used_number_pieces_arr_for_level_5 = [2,4,0,0,7,9,0,0,1,0,0,9,5,8,0,0,7,4,0,0,8,0,0,0,2,0,0,0,8,0,0,0,6,0,0,9,6,0,0,0,0,0,0,0,8,7,0,0,1,0,0,0,2,0,0,0,4,0,0,0,9,0,0,8,2,0,0,9,1,5,0,0,9,0,0,4,6,0,0,1,2],
+			used_number_pieces_arr_for_level_6 = [0,0,2,0,3,0,0,0,0,4,8,9,0,0,1,7,0,3,0,0,1,0,2,8,0,0,6,0,3,0,8,0,0,0,1,4,0,0,4,1,9,0,2,0,0,0,1,8,0,4,3,0,7,0,0,9,0,3,1,2,0,0,0,8,2,0,5,0,4,0,0,0,1,4,7,9,8,0,3,0,2],
+			used_number_pieces_arr_for_level_7 = [0,2,8,4,0,1,0,0,9,5,1,4,8,0,0,7,0,3,0,0,7,0,0,0,8,0,4,2,0,5,0,1,0,4,0,8,8,0,6,0,3,0,0,9,1,0,3,0,0,8,0,2,7,6,0,5,9,6,0,7,3,0,2,0,4,0,0,0,0,1,6,0,0,0,0,0,5,2,0,0,0],
+			used_number_pieces_arr_for_level_8 = [0,0,0,0,7,0,0,0,0,4,3,6,0,9,1,0,0,0,0,7,0,6,0,2,0,5,9,6,0,4,0,8,0,0,0,0,7,0,0,0,1,0,0,0,6,3,0,0,0,0,4,5,7,0,1,6,0,0,0,0,0,0,0,2,0,0,1,0,6,0,3,5,0,4,0,0,0,0,8,0,0],
+			used_number_pieces_arr_for_level_9 = [0,3,9,0,0,0,8,0,0,6,1,0,0,0,7,0,9,5,0,5,8,0,0,0,0,7,0,5,0,0,7,0,8,1,0,3,0,0,0,4,6,2,9,5,7,2,0,0,0,0,0,0,0,0,0,0,0,0,0,5,0,0,9,0,0,0,0,0,0,0,3,0,9,0,6,0,0,0,5,0,4],
+			used_number_pieces_arr_for_level_10 = [0,5,8,0,0,6,0,3,0,4,2,0,5,0,8,9,7,6,9,3,0,0,0,0,0,0,0,0,0,0,0,0,0,3,0,0,0,4,0,0,0,2,0,8,0,0,0,0,0,0,0,1,0,0,0,0,4,0,0,0,0,0,0,2,1,3,7,5,0,8,0,0,0,8,7,0,1,0,5,0,3],
 			used_number_pieces_arr_for_level_11 = [],
 			used_number_pieces_arr_for_level_12 = [],
 			used_number_pieces_arr_for_level_13 = [],
@@ -601,6 +617,62 @@ VernonChuo.SudokuOnline = function()
 					return used_number_pieces_arr_for_level_1;
 				case "level_2":
 					return used_number_pieces_arr_for_level_2;
+				case "level_3":
+					return used_number_pieces_arr_for_level_3;
+				case "level_4":
+					return used_number_pieces_arr_for_level_4;
+				case "level_5":
+					return used_number_pieces_arr_for_level_5;
+				case "level_6":
+					return used_number_pieces_arr_for_level_6;
+				case "level_7":
+					return used_number_pieces_arr_for_level_7;
+				case "level_8":
+					return used_number_pieces_arr_for_level_8;
+				case "level_9":
+					return used_number_pieces_arr_for_level_9;
+				case "level_10":
+					return used_number_pieces_arr_for_level_10;
+				case "level_11":
+					return used_number_pieces_arr_for_level_11;
+				case "level_12":
+					return used_number_pieces_arr_for_level_12;
+				case "level_13":
+					return used_number_pieces_arr_for_level_13;
+				case "level_14":
+					return used_number_pieces_arr_for_level_14;
+				case "level_15":
+					return used_number_pieces_arr_for_level_15;
+				case "level_16":
+					return used_number_pieces_arr_for_level_16;
+				case "level_17":
+					return used_number_pieces_arr_for_level_17;
+				case "level_18":
+					return used_number_pieces_arr_for_level_18;
+				case "level_19":
+					return used_number_pieces_arr_for_level_19;
+				case "level_20":
+					return used_number_pieces_arr_for_level_20;
+				case "level_21":
+					return used_number_pieces_arr_for_level_21;
+				case "level_22":
+					return used_number_pieces_arr_for_level_22;
+				case "level_23":
+					return used_number_pieces_arr_for_level_23;
+				case "level_24":
+					return used_number_pieces_arr_for_level_24;
+				case "level_25":
+					return used_number_pieces_arr_for_level_25;
+				case "level_26":
+					return used_number_pieces_arr_for_level_26;
+				case "level_27":
+					return used_number_pieces_arr_for_level_27;
+				case "level_28":
+					return used_number_pieces_arr_for_level_28;
+				case "level_29":
+					return used_number_pieces_arr_for_level_29;
+				case "level_30":
+					return used_number_pieces_arr_for_level_30;
 				default:
 					break;
 			}
