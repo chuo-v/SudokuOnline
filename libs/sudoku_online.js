@@ -30,38 +30,77 @@ VernonChuo.SudokuOnline = function()
 
 	var init = function()
 	{
-		$("#loading_div_content").html("Loading Sudoku Online...");
-		LevelControl.displayLoadingScreen();
-		PlayerInteractivity.repositionGameBoardArea();
-		$("#navigation_menu").slimScroll({
-			height: "auto",
-			size: "4px"
-		});
-		$("#home").addClass("selected_level");
-		EventHandlers.attachAllEventHandlers();
-		$("#navigation_panel_wrapper").css({display: "block"});
-	};
+		function execute() {
+			hideHomePage();
+			hideNavigationPanel();
+			
+			$("#loading_div_content").html("Loading Sudoku Online...");
+			LevelControl.displayLoadingScreen();
+			
+			displayHomePage();
+			displayNavigationPanel();
+
+			PlayerInteractivity.repositionGameBoardArea();
+			$("#navigation_menu").slimScroll({
+				height: "auto",
+				size: "4px"
+			});
+			$("#home").addClass("selected_level");
+			EventHandlers.attachAllEventHandlers();
+		}
+
+		function hideHomePage() {
+			$("#home_page").css({left: "-99999px", right: "auto"});
+		}
+		function displayHomePage () {
+			$("#home_page").css({left: "0px", right: "auto"});
+		}
+		function hideNavigationPanel() {
+			$("#navigation_panel_wrapper").css({left: "-99999px", right: "auto"});
+		}
+		function displayNavigationPanel() {
+			$("#navigation_panel_wrapper").css({left: "0px", right: "auto"});
+		}
+
+		var publicObjects =
+		{
+			execute : execute
+		};
+
+		return publicObjects;
+	}();
 
 	var EventHandlers = function()
 	{
 		function attachAllEventHandlers() {
 			attachEventHandlersForNavigationPanelButtons();
 			attachEventHandlerForClearBoardButton();
+			attachEventHandlerForInstructionPopupButton();
 			attachEventHandlerForWindowObject();
 			attachEventHandlersForDocumentObject();
-		};
+		}
 		function attachEventHandlersForNavigationPanelButtons() {
 			$.each($(".navigation_panel_button"), function(index, value) {
 				$("#"+value.id).click(function() {
 					LevelControl.loadLevel(value.id);
 				});
 			});
-		};
+		}
 		function attachEventHandlerForClearBoardButton() {
 			$("#clear_board_button").click(function() {
 				LevelControl.clearBoard();
 			});
-		};
+		}
+		function attachEventHandlerForInstructionPopupButton() {
+			$("#instruction_popup_button").bind({
+				mouseover : function() {
+					$("#instruction_popup").css({display: "block"});
+				},
+				mouseout : function() {
+					$("#instruction_popup").css({display: "none"});
+				}
+			});
+		}
 		function attachEventHandlerForWindowObject() {
 			$(window).resize(function() {
 				PlayerInteractivity.repositionGameBoardArea();
@@ -125,7 +164,7 @@ VernonChuo.SudokuOnline = function()
 		var publicObjects =
 		{
 			attachAllEventHandlers : attachAllEventHandlers
-		}
+		};
 
 		return publicObjects;
 	}();
@@ -175,6 +214,16 @@ VernonChuo.SudokuOnline = function()
 			var level_completed_msgbox_offset_left = game_board_offset_left + 15,
 				level_completed_msgbox_offset_top = game_board_offset_top + 160;
 			$("#level_completed_msgbox_wrapper").css({left: level_completed_msgbox_offset_left+"px", right: "auto", top: level_completed_msgbox_offset_top+"px", bottom: "auto"});
+
+			// position instruction popup button
+			var instruction_popup_button_offset_top = game_board_offset_top + 590,
+				instruction_popup_button_offset_left = information_box_offset_left + 111;
+			$("#instruction_popup_button").css({top: instruction_popup_button_offset_top+"px", bottom: "auto", left: instruction_popup_button_offset_left+"px", right: "auto"});
+			
+			// position instruction popup
+			var instruction_popup_offset_top = game_board_offset_top - 5,
+				instruction_popup_offset_left = game_board_offset_left - 5;
+			$("#instruction_popup").css({top: instruction_popup_offset_top+"px", bottom: "auto", left: instruction_popup_offset_left+"px", right: "auto"});
 		}
 
 		function dragUnusedNumberPiece(event) {
@@ -728,7 +777,7 @@ VernonChuo.SudokuOnline = function()
 
 	var publicObjects =
 	{
-		init: init
+		init : init
 	};
 
 	return publicObjects;
@@ -736,5 +785,5 @@ VernonChuo.SudokuOnline = function()
 
 	
 $(document).ready(function() {
-	VernonChuo.SudokuOnline.init();
+	VernonChuo.SudokuOnline.init.execute();
 });
