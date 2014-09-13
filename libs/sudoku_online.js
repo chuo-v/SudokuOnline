@@ -31,7 +31,6 @@ VernonChuo.SudokuOnline = function()
 	var init = function()
 	{
 		function execute() {
-			hideHomePage();
 			hideNavigationPanel();
 			
 			$("#loading_div_content").html("Loading Sudoku Online...");
@@ -41,17 +40,14 @@ VernonChuo.SudokuOnline = function()
 			displayNavigationPanel();
 
 			PlayerInteractivity.repositionGameBoardArea();
-			$("#navigation_menu").slimScroll({
+			$("#navigation_panel").slimScroll({
 				height: "auto",
 				size: "4px"
 			});
 			$("#home").addClass("selected_level");
 			EventHandlers.attachAllEventHandlers();
 		}
-
-		function hideHomePage() {
-			$("#home_page").css({left: "-99999px", right: "auto"});
-		}
+		
 		function displayHomePage () {
 			$("#home_page").css({left: "0px", right: "auto"});
 		}
@@ -62,12 +58,12 @@ VernonChuo.SudokuOnline = function()
 			$("#navigation_panel_wrapper").css({left: "0px", right: "auto"});
 		}
 
-		var publicObjects =
+		var public_objects =
 		{
 			execute : execute
 		};
 
-		return publicObjects;
+		return public_objects;
 	}();
 
 	var EventHandlers = function()
@@ -104,7 +100,7 @@ VernonChuo.SudokuOnline = function()
 		function attachEventHandlerForWindowObject() {
 			$(window).resize(function() {
 				PlayerInteractivity.repositionGameBoardArea();
-				$("#navigation_menu").slimScroll({ height: "auto" });
+				$("#navigation_panel").slimScroll({ height: "auto" });
 			});
 		}
 		function attachEventHandlersForDocumentObject() {
@@ -161,12 +157,12 @@ VernonChuo.SudokuOnline = function()
 			});
 		}
 
-		var publicObjects =
+		var public_objects =
 		{
 			attachAllEventHandlers : attachAllEventHandlers
 		};
 
-		return publicObjects;
+		return public_objects;
 	}();
 
 	var PlayerInteractivity = function()
@@ -275,7 +271,7 @@ VernonChuo.SudokuOnline = function()
 			return (active_tile_row_num-1)*9 + (active_tile_column_num-1);
 		}
 
-		var publicObjects =
+		var public_objects =
 		{
 			repositionGameBoardArea : repositionGameBoardArea,
 			dragUnusedNumberPiece : dragUnusedNumberPiece,
@@ -284,7 +280,7 @@ VernonChuo.SudokuOnline = function()
 			getIndexOfActiveTileInGivenTilesArr : getIndexOfActiveTileInGivenTilesArr
 		};
 
-		return publicObjects;
+		return public_objects;
 	}();
 
 	var LevelControl = function()
@@ -312,8 +308,8 @@ VernonChuo.SudokuOnline = function()
 			if(level_id == "home") {
 				$("#loading_div_content").html($("#loading_div_content").html()+"<span class='loading_div_content_gray_text'>Loading Home Page...</span>");
 				displayLoadingScreen();
-				$("#game_board_area").css({display: "none"});
-				$("#home_page").css({display: "block"});
+				$("#game_board_area").css({left: "-99999px", right: "auto"});
+				$("#home_page").css({left: "0px", right: "auto"});
 			} else {
 				// level_id is of the form "level_*i*" where *i* is a number,
 				// so to retrieve the number of the level loaded, simply use
@@ -321,8 +317,8 @@ VernonChuo.SudokuOnline = function()
 				var new_level_num = level_id.substring("level_".length).toString();
 				$("#loading_div_content").html($("#loading_div_content").html()+"<span class='loading_div_content_gray_text'>Loading Level "+new_level_num+"...</span>");
 				displayLoadingScreen();
-				$("#home_page").css({display: "none"});
-				$("#game_board_area").css({display: "block"});
+				$("#home_page").css({left: "-99999px", right: "auto"});
+				$("#game_board_area").css({left: "0px", right: "auto"});
 				setGivenNumbersAndUnusedGamePiecesArraysForCurrentLevel(level_id);
 				setupGameBoard(level_id);
 			}
@@ -446,14 +442,14 @@ VernonChuo.SudokuOnline = function()
 			}, 2000);
 		}
 
-		var publicObjects =
+		var public_objects =
 		{
 			loadLevel : loadLevel,
 			clearBoard : clearBoard,
 			displayLoadingScreen : displayLoadingScreen
 		};
 
-		return publicObjects;
+		return public_objects;
 	}();
 
 	var PlayerSelections = function()
@@ -764,7 +760,7 @@ VernonChuo.SudokuOnline = function()
 			}, 1000);
 		}
 
-		var publicObjects =
+		var public_objects =
 		{
 			determineAndExecutePlayerSelection : determineAndExecutePlayerSelection,
 			removeDoubleClickedUsedGamePiece : removeDoubleClickedUsedGamePiece,
@@ -772,15 +768,15 @@ VernonChuo.SudokuOnline = function()
 			getUsedNumberPiecesArrForCurrentLevel : getUsedNumberPiecesArrForCurrentLevel
 		};
 
-		return publicObjects;
+		return public_objects;
 	}();
 
-	var publicObjects =
+	var public_objects =
 	{
 		init : init
 	};
 
-	return publicObjects;
+	return public_objects;
 }();
 
 	
