@@ -125,8 +125,8 @@ VernonChuo.SudokuOnline = function()
 					unused_number_piece_being_dragged_id = "none";
 					is_draggable_unused_number_piece_displayed = false;
 
-					var active_tile_row_num = PlayerInteractivity.getActiveCellRowNum(event),
-					active_tile_column_num = PlayerInteractivity.getActiveCellColumnNum(event);
+					var active_tile_row_num = PlayerInteractivity.getActiveTileRowNum(event),
+					active_tile_column_num = PlayerInteractivity.getActiveTileColumnNum(event);
 
 					$(".game_board_tile").css({backgroundColor:"#FFFFFF"});
 
@@ -168,6 +168,7 @@ VernonChuo.SudokuOnline = function()
 	var PlayerInteractivity = function()
 	{
 		var GAME_BOARD_LENGTH = 630,
+			GAME_BOARD_TILE_LENGTH = 70,
 			game_board_offset_left = 0,
 			game_board_offset_top = 0;
 
@@ -239,15 +240,16 @@ VernonChuo.SudokuOnline = function()
 
 		function centerActiveDraggableUnusedGamePieceAtCursor(event) {
 			var mouseXPos = event.clientX,
-				mouseYPos = event.clientY;
-			var game_piece_center_x = mouseXPos - 20,
-			game_piece_center_y = mouseYPos - 20;
-			$("#"+unused_number_piece_being_dragged_id).css({left:game_piece_center_x+"px",right:"auto",top:game_piece_center_y+"px",bottom:"auto"});
+				mouseYPos = event.clientY,
+				game_board_bounding_rect = document.getElementById("game_board").getBoundingClientRect(),
+				game_piece_center_x = mouseXPos - 20 + (game_board_offset_left - game_board_bounding_rect.left),
+				game_piece_center_y = mouseYPos - 20 + (game_board_offset_top - game_board_bounding_rect.top);
+			$("#"+unused_number_piece_being_dragged_id).css({left:game_piece_center_x+"px", right:"auto", top:game_piece_center_y+"px", bottom:"auto"});
 		}
 
 		function highlightTileHoveredByCursor(event) {
-			var active_tile_row_num = getActiveCellRowNum(event),
-				active_tile_column_num = getActiveCellColumnNum(event);
+			var active_tile_row_num = getActiveTileRowNum(event),
+				active_tile_column_num = getActiveTileColumnNum(event);
 
 			$(".game_board_tile").css({backgroundColor:"#FFFFFF"});
 
@@ -257,14 +259,14 @@ VernonChuo.SudokuOnline = function()
 			}
 		}
 
-		function getActiveCellRowNum(event) {
-			var GAME_BOARD_TILE_LENGTH = GAME_BOARD_LENGTH / 9;
-			return Math.ceil((event.clientY - game_board_offset_top) / GAME_BOARD_TILE_LENGTH);
+		function getActiveTileRowNum(event) {
+			var game_board_vertical_offset_from_viewport = document.getElementById("game_board").getBoundingClientRect().top;
+			return Math.ceil((event.clientY - game_board_vertical_offset_from_viewport) / GAME_BOARD_TILE_LENGTH);
 		}
 
-		function getActiveCellColumnNum(event) {
-			var GAME_BOARD_TILE_LENGTH = GAME_BOARD_LENGTH / 9;
-			return Math.ceil((event.clientX - game_board_offset_left) / GAME_BOARD_TILE_LENGTH);
+		function getActiveTileColumnNum(event) {
+			var game_board_horizontal_offset_from_viewport = document.getElementById("game_board").getBoundingClientRect().left;
+			return Math.ceil((event.clientX - game_board_horizontal_offset_from_viewport) / GAME_BOARD_TILE_LENGTH);
 		}
 
 		function getIndexOfActiveTileInGivenTilesArr(active_tile_row_num, active_tile_column_num) {
@@ -275,8 +277,8 @@ VernonChuo.SudokuOnline = function()
 		{
 			repositionGameBoardArea : repositionGameBoardArea,
 			dragUnusedNumberPiece : dragUnusedNumberPiece,
-			getActiveCellRowNum : getActiveCellRowNum,
-			getActiveCellColumnNum : getActiveCellColumnNum,
+			getActiveTileRowNum : getActiveTileRowNum,
+			getActiveTileColumnNum : getActiveTileColumnNum,
 			getIndexOfActiveTileInGivenTilesArr : getIndexOfActiveTileInGivenTilesArr
 		};
 
@@ -488,8 +490,8 @@ VernonChuo.SudokuOnline = function()
 		function determineAndExecutePlayerSelection(event) {
 			var dragged_unused_number_piece_number = getDraggedNumberPieceNumber(event.target.id),
 				used_number_pieces_arr_for_current_level = getUsedNumberPiecesArrForCurrentLevel(current_level_id),
-				active_tile_row_num = PlayerInteractivity.getActiveCellRowNum(event),
-				active_tile_column_num = PlayerInteractivity.getActiveCellColumnNum(event),
+				active_tile_row_num = PlayerInteractivity.getActiveTileRowNum(event),
+				active_tile_column_num = PlayerInteractivity.getActiveTileColumnNum(event),
 				index_of_active_tile_in_given_tiles_arr = PlayerInteractivity.getIndexOfActiveTileInGivenTilesArr(active_tile_row_num, active_tile_column_num);
 
 			if (given_numbers_arr_for_current_level[index_of_active_tile_in_given_tiles_arr] != 0) {
@@ -551,8 +553,8 @@ VernonChuo.SudokuOnline = function()
 		}
 
 		function removeDoubleClickedUsedGamePiece(event) {
-			var active_tile_row_num = PlayerInteractivity.getActiveCellRowNum(event),
-				active_tile_column_num = PlayerInteractivity.getActiveCellColumnNum(event);
+			var active_tile_row_num = PlayerInteractivity.getActiveTileRowNum(event),
+				active_tile_column_num = PlayerInteractivity.getActiveTileColumnNum(event);
 
 			var index_of_active_tile_in_given_tiles_arr = PlayerInteractivity.getIndexOfActiveTileInGivenTilesArr(active_tile_row_num, active_tile_column_num); 
 			if(given_numbers_arr_for_current_level[index_of_active_tile_in_given_tiles_arr] == 0) {

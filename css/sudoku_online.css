@@ -67,7 +67,7 @@ body {
 }
 
 #loading_div {
-	position: absolute;
+	position: fixed;
 	width: 100%; height: 100%;
 	background-color: #FFFFFF;
 	z-index: 10;
