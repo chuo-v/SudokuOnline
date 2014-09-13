@@ -40,10 +40,7 @@ VernonChuo.SudokuOnline = function()
 			displayNavigationPanel();
 
 			PlayerInteractivity.repositionGameBoardArea();
-			$("#navigation_panel").slimScroll({
-				height: "auto",
-				size: "4px"
-			});
+			$("#navigation_panel").slimScroll({height: "auto", size: "4px"});
 			$("#home").addClass("selected_level");
 			EventHandlers.attachAllEventHandlers();
 		}
@@ -100,7 +97,7 @@ VernonChuo.SudokuOnline = function()
 		function attachEventHandlerForWindowObject() {
 			$(window).resize(function() {
 				PlayerInteractivity.repositionGameBoardArea();
-				$("#navigation_panel").slimScroll({ height: "auto" });
+				$("#navigation_panel").slimScroll({height: "auto"});
 			});
 		}
 		function attachEventHandlersForDocumentObject() {
@@ -178,12 +175,12 @@ VernonChuo.SudokuOnline = function()
 
 			// do not allow the game board area to be repositioned horizontally or vertically
 			// if the window is resized to a size that is smaller than the minimum allowed width
-			// (1150px) or the minimum allowed height (700px), respectively
+			// (1200px) or the minimum allowed height (700px), respectively
 			if(window_height < 700) {
 				window_height = 700;
 			}
-			if(window_width < 1150) {
-				window_width = 1150;
+			if(window_width < 1200) {
+				window_width = 1200;
 			}
 
 			// position game board
@@ -202,7 +199,7 @@ VernonChuo.SudokuOnline = function()
 			$("#clear_board_button").css({top: clear_board_button_offset_top+"px", bottom: "auto", left: unused_number_pieces_panel_offset_left+"px", right: "auto"});
 			
 			// position information box
-			var information_box_width_incl_padding = 280, game_board_left_border_and_margin_width = 15,
+			var information_box_width_incl_padding = 300, game_board_left_border_and_margin_width = 15,
 				information_box_offset_left = game_board_offset_left - information_box_width_incl_padding - game_board_left_border_and_margin_width;
 			$("#information_box").css({top: game_board_offset_top+"px", bottom: "auto", left: information_box_offset_left+"px", right: "auto"});
 
@@ -213,8 +210,8 @@ VernonChuo.SudokuOnline = function()
 			$("#level_completed_msgbox_wrapper").css({left: level_completed_msgbox_offset_left+"px", right: "auto", top: level_completed_msgbox_offset_top+"px", bottom: "auto"});
 
 			// position instruction popup button
-			var instruction_popup_button_offset_top = game_board_offset_top + 590,
-				instruction_popup_button_offset_left = information_box_offset_left + 111;
+			var instruction_popup_button_offset_top = game_board_offset_top + 580,
+				instruction_popup_button_offset_left = information_box_offset_left + 125;
 			$("#instruction_popup_button").css({top: instruction_popup_button_offset_top+"px", bottom: "auto", left: instruction_popup_button_offset_left+"px", right: "auto"});
 			
 			// position instruction popup
@@ -233,18 +230,16 @@ VernonChuo.SudokuOnline = function()
 
 		function fadeInActiveDraggableUnusedGamePiece() {
 			if(!is_draggable_unused_number_piece_displayed) {
-				$("#"+unused_number_piece_being_dragged_id).animate({opacity:1});
+				$("#"+unused_number_piece_being_dragged_id).animate({opacity: 1});
 				is_draggable_unused_number_piece_displayed = true;
 			}
 		}
 
 		function centerActiveDraggableUnusedGamePieceAtCursor(event) {
-			var mouseXPos = event.clientX,
-				mouseYPos = event.clientY,
-				game_board_bounding_rect = document.getElementById("game_board").getBoundingClientRect(),
-				game_piece_center_x = mouseXPos - 20 + (game_board_offset_left - game_board_bounding_rect.left),
-				game_piece_center_y = mouseYPos - 20 + (game_board_offset_top - game_board_bounding_rect.top);
-			$("#"+unused_number_piece_being_dragged_id).css({left:game_piece_center_x+"px", right:"auto", top:game_piece_center_y+"px", bottom:"auto"});
+			var game_board_bounding_rect = document.getElementById("game_board").getBoundingClientRect(),
+				game_piece_center_x = event.clientX - 20 + (game_board_offset_left - game_board_bounding_rect.left),
+				game_piece_center_y = event.clientY - 20 + (game_board_offset_top - game_board_bounding_rect.top);
+			$("#"+unused_number_piece_being_dragged_id).css({left: game_piece_center_x+"px", right: "auto", top: game_piece_center_y+"px", bottom: "auto"});
 		}
 
 		function highlightTileHoveredByCursor(event) {
