@@ -36,7 +36,7 @@ body {
 	position:relative;
 	margin: 0 auto;
 	width: 40px; height: 30px;
-	background-color: #499DF5;
+	background-color: #33A1DE;
 	border: 2px solid #FFFFFF;
 	margin-top: 3px; margin-bottom: 3px;
 	margin-left: 10px; margin-right: 5px;
@@ -49,13 +49,13 @@ body {
 }
 .navigation_panel_button:hover {
 	background-color: #FFFFFF;
-	border: 2px solid #499DF5;
-	color: #499DF5;
+	border: 2px solid #33A1DE;
+	color: #33A1DE;
 }
 .selected_level {
 	background-color: #FFFFFF;
 	border: 2px solid #499DF5;
-	color: #499DF5;
+	color: #33A1DE;
 }
 .completed_level {
 	background-color: green;
@@ -266,14 +266,15 @@ body {
 
 #information_box {
 	position: absolute;
-	width: 280px; height: 540px;
+	width: 280px; height: 550px;
 	background-color: rgba(0,0,0,0.2);
 	padding: 10px;
 	border-radius: 20px;
 }
 .information_box_title {
 	font-weight: 500;
-	font-size: 23px;
+	font-size: 25px;
+	font-weight: 500;
 	text-align: center;
 	margin-top: 12px; margin-bottom: 3px;
 }
@@ -353,8 +354,13 @@ body {
 	width: 645px; height: 645px;
 	background-color: rgba(235,235,235,0.95);
 	border-radius: 5px;
+	text-align: center;
 	z-index: 9;
 	display: none;
+}
+#instruction_popup_title {
+	font-size: 25px;
+	margin-top: 10px; margin-bottom: 10px;
 }
 
 footer {
