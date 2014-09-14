@@ -30,6 +30,8 @@ VernonChuo.SudokuOnline = function()
 
 	var init = function()
 	{
+		var NUM_LEVELS = 30;
+
 		function execute() {
 			hideNavigationPanel();
 			
@@ -42,6 +44,7 @@ VernonChuo.SudokuOnline = function()
 			PlayerInteractivity.repositionGameBoardArea();
 			$("#navigation_panel").slimScroll({height: "auto", size: "4px"});
 			$("#home").addClass("selected_level");
+			
 			EventHandlers.attachAllEventHandlers();
 			initializeUsedNumberPiecesArrays();
 		}
@@ -49,19 +52,34 @@ VernonChuo.SudokuOnline = function()
 		function displayHomePage () {
 			$("#home_page").css({left: "0px", right: "auto"});
 		}
+
 		function hideNavigationPanel() {
 			$("#navigation_panel_wrapper").css({left: "-99999px", right: "auto"});
 		}
+		
 		function displayNavigationPanel() {
 			$("#navigation_panel_wrapper").css({left: "0px", right: "auto"});
 		}
 
 		function initializeUsedNumberPiecesArrays() {
-			var current_level, used_number_pieces_arr_for_current_level;
-			for(var i = 1; i <= 30; i++) {
-				current_level = "level_"+i;
-				used_number_pieces_arr_for_current_level = LevelControl.getGivenNumbersArrForCurrentLevel(current_level);
-				LevelControl.setUsedNumberPiecesArrForCurrentLevel(current_level, used_number_pieces_arr_for_current_level);
+			var stored_used_number_pieces_arr_for_current_level,
+				current_level_id,
+				used_number_pieces_arr_for_current_level;
+
+			for(var i = 1; i <= NUM_LEVELS; i++) {
+				current_level_id = "level_"+i;
+				stored_used_number_pieces_arr_for_current_level = localStorage.getItem("SudokuOnline.used_number_pieces_arr_for_"+current_level_id);
+				
+				if(!stored_used_number_pieces_arr_for_current_level) {
+					// if there is no corresponding number pieces array stored in localStorage
+					used_number_pieces_arr_for_current_level = LevelControl.getGivenNumbersArrForCurrentLevel(current_level_id);
+					localStorage.setItem("SudokuOnline.used_number_pieces_arr_for_"+current_level_id, used_number_pieces_arr_for_current_level.toString());
+				} else {
+					// if there is a corresponding number pieces array stored in localStorage
+					used_number_pieces_arr_for_current_level = stored_used_number_pieces_arr_for_current_level.split(",").map(Number);
+				}
+
+				LevelControl.setUsedNumberPiecesArrForCurrentLevel(current_level_id, used_number_pieces_arr_for_current_level);
 			}
 		}
 
@@ -293,35 +311,35 @@ VernonChuo.SudokuOnline = function()
 	var LevelControl = function()
 	{
 		var used_number_pieces_arr_for_level_1,
-			used_number_pieces_arr_for_level_2 = [8,0,0,0,1,6,0,0,5,5,0,4,0,0,0,0,0,0,1,6,0,2,0,4,0,3,0,0,2,5,0,0,9,7,0,1,0,0,0,5,0,1,0,0,0,6,0,1,3,0,0,4,5,0,0,1,0,8,0,7,0,2,3,0,0,0,0,0,0,6,0,4,9,0,0,4,6,0,0,0,8],
-			used_number_pieces_arr_for_level_3 = [0,3,0,0,7,1,0,0,0,8,0,2,0,0,9,0,0,6,0,0,0,0,2,0,4,0,3,2,0,7,0,0,3,0,8,0,9,1,0,0,0,0,5,3,0,0,0,0,4,1,7,0,6,0,0,4,0,9,0,0,0,7,0,0,0,0,1,8,0,3,0,0,0,9,1,7,0,0,0,0,5],
-			used_number_pieces_arr_for_level_4 = [5,6,0,0,9,0,0,3,8,4,0,7,0,3,0,2,0,5,3,0,0,0,0,0,0,0,6,1,3,0,5,0,2,0,8,9,0,0,0,0,8,0,0,0,0,8,9,6,0,1,0,5,2,3,0,1,0,0,0,0,0,5,0,7,0,0,9,2,5,0,0,1,0,5,8,6,7,1,3,4,0],
-			used_number_pieces_arr_for_level_5 = [2,4,0,0,7,9,0,0,1,0,0,9,5,8,0,0,7,4,0,0,8,0,0,0,2,0,0,0,8,0,0,0,6,0,0,9,6,0,0,0,0,0,0,0,8,7,0,0,1,0,0,0,2,0,0,0,4,0,0,0,9,0,0,8,2,0,0,9,1,5,0,0,9,0,0,4,6,0,0,1,2],
-			used_number_pieces_arr_for_level_6 = [0,0,2,0,3,0,0,0,0,4,8,9,0,0,1,7,0,3,0,0,1,0,2,8,0,0,6,0,3,0,8,0,0,0,1,4,0,0,4,1,9,0,2,0,0,0,1,8,0,4,3,0,7,0,0,9,0,3,1,2,0,0,0,8,2,0,5,0,4,0,0,0,1,4,7,9,8,0,3,0,2],
-			used_number_pieces_arr_for_level_7 = [0,2,8,4,0,1,0,0,9,5,1,4,8,0,0,7,0,3,0,0,7,0,0,0,8,0,4,2,0,5,0,1,0,4,0,8,8,0,6,0,3,0,0,9,1,0,3,0,0,8,0,2,7,6,0,5,9,6,0,7,3,0,2,0,4,0,0,0,0,1,6,0,0,0,0,0,5,2,0,0,0],
-			used_number_pieces_arr_for_level_8 = [0,0,0,0,7,0,0,0,0,4,3,6,0,9,1,0,0,0,0,7,0,6,0,2,0,5,9,6,0,4,0,8,0,0,0,0,7,0,0,0,1,0,0,0,6,3,0,0,0,0,4,5,7,0,1,6,0,0,0,0,0,0,0,2,0,0,1,0,6,0,3,5,0,4,0,0,0,0,8,0,0],
-			used_number_pieces_arr_for_level_9 = [0,3,9,0,0,0,8,0,0,6,1,0,0,0,7,0,9,5,0,5,8,0,0,0,0,7,0,5,0,0,7,0,8,1,0,3,0,0,0,4,6,2,9,5,7,2,0,0,0,0,0,0,0,0,0,0,0,0,0,5,0,0,9,0,0,0,0,0,0,0,3,0,9,0,6,0,0,0,5,0,4],
-			used_number_pieces_arr_for_level_10 = [0,5,8,0,0,6,0,3,0,4,2,0,5,0,8,9,7,6,9,3,0,0,0,0,0,0,0,0,0,0,0,0,0,3,0,0,0,4,0,0,0,2,0,8,0,0,0,0,0,0,0,1,0,0,0,0,4,0,0,0,0,0,0,2,1,3,7,5,0,8,0,0,0,8,7,0,1,0,5,0,3],
-			used_number_pieces_arr_for_level_11 = [3,9,0,0,4,0,2,0,0,0,0,0,0,0,0,4,0,0,0,0,0,0,0,0,8,0,0,0,7,0,5,0,9,0,0,0,0,4,0,0,0,6,0,3,0,9,0,0,4,0,0,7,5,0,4,0,0,0,0,0,3,0,6,0,0,0,8,0,0,0,2,0,6,1,0,0,0,0,0,4,8],
-			used_number_pieces_arr_for_level_12 = [0,5,1,6,8,0,2,0,0,0,0,0,1,0,0,0,0,5,0,0,0,0,9,0,8,0,3,0,7,0,8,0,5,0,3,0,0,0,0,0,0,3,0,5,4,0,0,0,9,0,0,7,0,0,1,0,0,0,0,0,0,0,0,6,0,0,0,5,0,4,0,0,7,0,0,0,0,0,5,0,0],
-			used_number_pieces_arr_for_level_13 = [1,4,5,0,0,0,0,6,8,2,7,8,0,9,0,3,0,0,0,0,6,0,0,4,0,0,0,0,0,0,0,5,0,0,3,0,0,0,0,0,0,0,1,0,0,0,0,9,4,1,8,6,0,7,0,0,0,0,0,0,0,0,6,0,0,0,0,7,0,0,0,0,0,0,0,9,4,0,0,0,0],
-			used_number_pieces_arr_for_level_14 = [0,5,8,6,0,0,4,0,1,0,0,0,0,0,0,0,0,0,0,3,0,0,0,4,8,7,0,0,0,0,4,7,0,0,1,0,0,0,0,0,0,0,2,0,8,0,0,0,0,0,0,0,4,0,0,0,9,0,6,0,0,3,4,0,4,7,0,3,0,6,0,0,0,0,0,0,0,0,0,5,2],
-			used_number_pieces_arr_for_level_15 = [0,1,4,2,0,3,0,0,9,3,2,6,0,0,0,8,0,0,0,0,7,0,0,0,0,0,0,9,0,0,3,0,0,0,0,0,4,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,3,0,2,0,0,7,0,0,1,8,6,0,0,0,6,8,0,4,0,0,6,0,8,0,0,0,0,0,0],
-			used_number_pieces_arr_for_level_16 = [1,0,5,0,3,9,0,0,4,6,8,9,0,0,0,0,0,5,0,7,0,0,1,0,0,0,0,0,0,0,0,6,0,0,0,9,0,0,0,0,0,0,0,0,0,0,0,2,0,0,8,0,0,0,7,4,0,0,0,3,5,2,0,0,0,1,0,4,0,0,0,0,0,0,0,1,0,0,0,7,3],
-			used_number_pieces_arr_for_level_17 = [0,0,0,1,0,0,0,0,4,0,0,2,0,0,0,0,0,0,8,4,0,9,0,0,0,2,0,0,3,6,0,1,0,7,0,9,0,0,9,0,0,0,0,0,0,0,8,0,0,0,0,0,5,0,0,0,5,7,6,0,4,3,0,0,0,8,0,5,0,0,0,0,3,0,0,0,8,9,0,0,0],
-			used_number_pieces_arr_for_level_18 = [3,8,2,0,0,0,0,1,0,7,0,0,0,8,3,0,0,0,0,0,0,0,1,0,5,0,8,0,0,1,9,0,0,8,0,0,2,0,0,0,0,5,0,0,0,0,0,0,7,4,1,0,5,0,1,0,0,3,0,0,0,8,5,0,6,0,0,0,0,0,0,0,0,0,0,0,0,0,0,9,0],
-			used_number_pieces_arr_for_level_19 = [9,0,0,3,0,1,0,0,0,4,1,5,0,0,0,2,3,0,6,0,0,0,0,0,1,0,0,0,0,0,1,0,7,0,0,0,1,0,0,0,0,0,0,0,0,0,5,2,0,9,3,0,0,4,2,0,0,0,0,0,0,4,8,0,0,1,0,0,8,0,0,0,0,0,3,0,0,9,0,0,0],
-			used_number_pieces_arr_for_level_20 = [0,0,0,0,0,0,7,0,0,0,0,0,0,0,0,2,0,6,0,0,0,0,0,0,0,5,9,0,0,1,8,0,0,0,6,0,6,9,0,0,0,7,0,2,0,0,4,0,0,0,0,3,0,0,0,3,4,0,0,0,6,0,8,0,0,0,0,0,6,0,7,2,2,5,6,0,0,8,0,0,0],
-			used_number_pieces_arr_for_level_21 = [0,0,6,0,0,0,0,4,0,2,0,0,0,0,0,0,0,0,0,5,3,0,0,0,0,8,9,0,0,0,0,5,3,0,0,8,0,0,0,0,0,0,0,3,0,0,3,7,0,0,0,0,0,0,0,0,0,3,0,0,0,0,0,0,0,0,2,0,0,3,0,0,0,9,2,0,4,0,0,0,6],
-			used_number_pieces_arr_for_level_22 = [0,0,0,0,5,0,0,0,0,0,0,0,1,0,0,7,0,0,0,0,0,0,0,0,0,0,5,0,0,0,0,0,0,0,0,4,0,0,7,0,0,0,0,1,9,0,8,0,0,7,1,0,0,0,0,1,0,0,0,0,0,0,0,0,0,4,6,0,0,0,3,2,0,6,0,8,4,0,1,0,0],
-			used_number_pieces_arr_for_level_23 = [4,0,5,0,0,0,0,0,0,0,0,0,0,4,0,6,0,0,0,2,0,0,6,5,4,7,0,0,0,2,0,0,4,0,0,0,0,0,0,0,0,0,8,0,0,0,0,8,0,0,2,0,0,0,8,0,0,1,0,0,0,4,0,0,0,4,0,0,0,0,0,0,0,0,0,4,0,0,2,0,0],
-			used_number_pieces_arr_for_level_24 = [0,0,0,0,0,6,0,3,0,0,0,0,0,0,0,0,0,0,0,0,0,4,0,0,5,0,7,3,5,0,6,0,0,0,0,0,2,0,0,3,0,4,0,0,5,0,0,0,0,0,0,0,0,0,8,0,0,5,0,7,0,0,0,0,0,0,0,4,0,1,7,0,0,4,0,1,0,0,0,0,0],
-			used_number_pieces_arr_for_level_25 = [0,0,0,1,0,0,0,7,2,0,7,9,0,3,0,0,0,0,5,0,1,7,0,0,3,0,0,0,0,0,0,0,0,0,1,0,7,0,0,0,0,6,0,0,9,0,0,0,0,8,0,0,0,6,0,0,0,0,0,0,0,0,0,0,6,2,0,0,0,0,0,7,8,0,0,0,0,0,0,0,0],
-			used_number_pieces_arr_for_level_26 = [0,0,0,0,0,8,1,0,0,0,0,0,0,3,9,0,0,0,0,2,6,0,0,0,0,0,0,0,3,4,8,0,0,0,1,0,0,7,0,0,0,5,8,0,0,0,0,0,1,0,0,7,0,0,0,0,5,0,7,0,2,0,0,0,0,9,0,0,0,0,0,0,0,0,0,0,0,0,0,5,0],
-			used_number_pieces_arr_for_level_27 = [0,0,0,5,9,0,0,6,0,0,5,0,0,0,0,0,0,2,0,0,0,0,0,2,8,9,0,0,0,7,1,0,0,3,0,0,0,0,0,6,0,0,0,0,0,0,0,0,0,0,3,0,1,0,8,0,0,9,0,0,0,2,0,0,0,5,0,0,8,0,0,0,0,0,2,0,0,0,0,0,0],
-			used_number_pieces_arr_for_level_28 = [7,0,0,0,0,0,0,0,0,9,3,0,0,7,0,0,6,0,0,0,0,0,0,6,0,0,0,8,0,0,2,0,1,0,0,0,0,0,0,7,5,0,0,0,6,0,0,0,0,6,0,0,0,0,0,8,7,0,0,0,0,0,0,0,0,0,0,0,0,0,0,7,0,5,0,6,0,0,0,4,2],
-			used_number_pieces_arr_for_level_29 = [0,0,0,0,0,0,0,0,6,0,0,0,0,9,0,0,4,0,0,0,0,0,0,0,2,1,0,0,0,9,0,8,0,0,0,0,0,6,0,7,0,0,1,9,4,3,0,0,0,4,0,0,0,0,0,0,2,4,0,0,9,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,7,0,6,0,0],
-			used_number_pieces_arr_for_level_30 = [6,8,0,0,0,0,5,0,0,4,0,1,2,0,7,0,0,0,0,0,0,4,0,5,0,0,0,0,0,0,0,0,8,7,5,0,0,0,0,0,0,0,0,0,0,0,4,0,0,0,0,0,3,0,0,0,4,0,0,3,0,1,0,0,0,0,8,4,0,0,0,0,0,0,0,0,1,0,0,0,0];
+			used_number_pieces_arr_for_level_2,
+			used_number_pieces_arr_for_level_3,
+			used_number_pieces_arr_for_level_4,
+			used_number_pieces_arr_for_level_5,
+			used_number_pieces_arr_for_level_6,
+			used_number_pieces_arr_for_level_7,
+			used_number_pieces_arr_for_level_8,
+			used_number_pieces_arr_for_level_9,
+			used_number_pieces_arr_for_level_10,
+			used_number_pieces_arr_for_level_11,
+			used_number_pieces_arr_for_level_12,
+			used_number_pieces_arr_for_level_13,
+			used_number_pieces_arr_for_level_14,
+			used_number_pieces_arr_for_level_15,
+			used_number_pieces_arr_for_level_16,
+			used_number_pieces_arr_for_level_17,
+			used_number_pieces_arr_for_level_18,
+			used_number_pieces_arr_for_level_19,
+			used_number_pieces_arr_for_level_20,
+			used_number_pieces_arr_for_level_21,
+			used_number_pieces_arr_for_level_22,
+			used_number_pieces_arr_for_level_23,
+			used_number_pieces_arr_for_level_24,
+			used_number_pieces_arr_for_level_25,
+			used_number_pieces_arr_for_level_26,
+			used_number_pieces_arr_for_level_27,
+			used_number_pieces_arr_for_level_28,
+			used_number_pieces_arr_for_level_29,
+			used_number_pieces_arr_for_level_30;
 
 		function loadLevel(level_id) {
 			// do nothing if player tries to load the same level
@@ -590,6 +608,9 @@ VernonChuo.SudokuOnline = function()
 				used_number_pieces_arr_for_current_level.push(given_numbers_arr_for_current_level[i]);
 			}
 
+			// update changes to localStorage
+			localStorage.setItem("SudokuOnline.used_number_pieces_arr_for_"+current_level_id, used_number_pieces_arr_for_current_level.toString());
+
 			// reset game board and place the given numbers back on the board
 			setupGameBoard(current_level_id);
 		}
@@ -699,6 +720,8 @@ VernonChuo.SudokuOnline = function()
 				}
 			}
 			displayMsgBoxIfLevelCompleted(used_number_pieces_arr_for_current_level);
+			// update changes to localStorage
+			localStorage.setItem("SudokuOnline.used_number_pieces_arr_for_"+current_level_id, used_number_pieces_arr_for_current_level.toString());
 		}
 
 		function getDraggedNumberPieceNumber(dragged_tile_id) {
@@ -754,6 +777,9 @@ VernonChuo.SudokuOnline = function()
 				// update used_tiles_arr
 				var used_number_pieces_arr_for_current_level = LevelControl.getUsedNumberPiecesArrForCurrentLevel(current_level_id);
 				used_number_pieces_arr_for_current_level[index_of_active_tile_in_given_tiles_arr] = 0;
+
+				// update changes to localStorage
+				localStorage.setItem("SudokuOnline.used_number_pieces_arr_for_"+current_level_id, used_number_pieces_arr_for_current_level.toString());
 			}
 		}
 
@@ -791,7 +817,6 @@ VernonChuo.SudokuOnline = function()
 		}
 
 		function checkIfTileIsUniqueInRow(active_tile_row_num, used_number_pieces_arr_for_current_level, dragged_unused_number_piece_number) {
-
 			var numbers_in_row_of_active_cell_arr = [],
 			index_of_number_in_row_of_active_cell;
 			for(var i = 0; i < 9; i++) {
@@ -807,7 +832,6 @@ VernonChuo.SudokuOnline = function()
 		}
 
 		function checkIfTileIsUniqueInColumn(active_tile_column_num, used_number_pieces_arr_for_current_level, dragged_unused_number_piece_number) {
-
 			var numbers_in_column_of_active_cell_arr = [],
 			index_of_number_in_column_of_active_cell;
 			for(var i = 0; i < 9; i++) {
@@ -823,7 +847,6 @@ VernonChuo.SudokuOnline = function()
 		}
 
 		function checkIfTileIsUniqueInSquare(active_tile_row_num, active_tile_column_num, used_number_pieces_arr_for_current_level, dragged_unused_number_piece_number) {
-
 			var numbers_in_square_of_active_cell_arr = [],
 			index_of_number_in_square_of_active_cell;
 			for(var i = 0; i < 3; i++) {
