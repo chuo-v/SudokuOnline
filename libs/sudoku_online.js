@@ -61,24 +61,43 @@ VernonChuo.SudokuOnline = function()
 			$("#navigation_panel_wrapper").css({left: "0px", right: "auto"});
 		}
 
-		function initializeUsedNumberPiecesArrays() {
-			var stored_used_number_pieces_arr_for_current_level,
-				current_level_id,
+		function initializeUsedNumberPiecesArrays() {	
+			if(isLocalStorageEnabled()) {
+				initializeUsedNumberPiecesArraysFromDataInLocalStorage();
+			} else {
+				initializeUsedNumberPiecesArraysAsGivenNumbers();
+			}
+		}
+
+		function initializeUsedNumberPiecesArraysFromDataInLocalStorage() {
+			var current_level_id,
+				stored_used_number_pieces_arr_for_current_level,
 				used_number_pieces_arr_for_current_level;
 
 			for(var i = 1; i <= NUM_LEVELS; i++) {
-				current_level_id = "level_"+i;
-				stored_used_number_pieces_arr_for_current_level = localStorage.getItem("SudokuOnline.used_number_pieces_arr_for_"+current_level_id);
-				
-				if(!stored_used_number_pieces_arr_for_current_level) {
-					// if there is no corresponding number pieces array stored in localStorage
-					used_number_pieces_arr_for_current_level = LevelControl.getGivenNumbersArrForCurrentLevel(current_level_id);
-					localStorage.setItem("SudokuOnline.used_number_pieces_arr_for_"+current_level_id, used_number_pieces_arr_for_current_level.toString());
-				} else {
-					// if there is a corresponding number pieces array stored in localStorage
-					used_number_pieces_arr_for_current_level = stored_used_number_pieces_arr_for_current_level.split(",").map(Number);
-				}
+					current_level_id = "level_"+i;
+					stored_used_number_pieces_arr_for_current_level = localStorage.getItem("SudokuOnline.used_number_pieces_arr_for_"+current_level_id);
+					
+					if(!stored_used_number_pieces_arr_for_current_level) {
+						// if there is no corresponding number pieces array stored in localStorage
+						used_number_pieces_arr_for_current_level = LevelControl.getGivenNumbersArrForCurrentLevel(current_level_id);
+						localStorage.setItem("SudokuOnline.used_number_pieces_arr_for_"+current_level_id, used_number_pieces_arr_for_current_level.toString());
+					} else {
+						// if there is a corresponding number pieces array stored in localStorage
+						used_number_pieces_arr_for_current_level = stored_used_number_pieces_arr_for_current_level.split(",").map(Number);
+					}
 
+					LevelControl.setUsedNumberPiecesArrForCurrentLevel(current_level_id, used_number_pieces_arr_for_current_level);
+				}
+		}
+
+		function initializeUsedNumberPiecesArraysAsGivenNumbers() {
+			var current_level_id,
+				used_number_pieces_arr_for_current_level;
+			
+			for(var i = 1; i <= NUM_LEVELS; i++) {
+				current_level_id = "level_"+i;
+				used_number_pieces_arr_for_current_level = LevelControl.getGivenNumbersArrForCurrentLevel(current_level_id);
 				LevelControl.setUsedNumberPiecesArrForCurrentLevel(current_level_id, used_number_pieces_arr_for_current_level);
 			}
 		}
@@ -608,8 +627,10 @@ VernonChuo.SudokuOnline = function()
 				used_number_pieces_arr_for_current_level.push(given_numbers_arr_for_current_level[i]);
 			}
 
-			// update changes to localStorage
-			localStorage.setItem("SudokuOnline.used_number_pieces_arr_for_"+current_level_id, used_number_pieces_arr_for_current_level.toString());
+			if(isLocalStorageEnabled()) {
+				// update changes to localStorage
+				localStorage.setItem("SudokuOnline.used_number_pieces_arr_for_"+current_level_id, used_number_pieces_arr_for_current_level.toString());
+			}
 
 			// reset game board and place the given numbers back on the board
 			setupGameBoard(current_level_id);
@@ -720,8 +741,10 @@ VernonChuo.SudokuOnline = function()
 				}
 			}
 			displayMsgBoxIfLevelCompleted(used_number_pieces_arr_for_current_level);
-			// update changes to localStorage
-			localStorage.setItem("SudokuOnline.used_number_pieces_arr_for_"+current_level_id, used_number_pieces_arr_for_current_level.toString());
+			if(isLocalStorageEnabled()) {
+				// update changes to localStorage
+				localStorage.setItem("SudokuOnline.used_number_pieces_arr_for_"+current_level_id, used_number_pieces_arr_for_current_level.toString());
+			}
 		}
 
 		function getDraggedNumberPieceNumber(dragged_tile_id) {
@@ -778,8 +801,10 @@ VernonChuo.SudokuOnline = function()
 				var used_number_pieces_arr_for_current_level = LevelControl.getUsedNumberPiecesArrForCurrentLevel(current_level_id);
 				used_number_pieces_arr_for_current_level[index_of_active_tile_in_given_tiles_arr] = 0;
 
-				// update changes to localStorage
-				localStorage.setItem("SudokuOnline.used_number_pieces_arr_for_"+current_level_id, used_number_pieces_arr_for_current_level.toString());
+				if(isLocalStorageEnabled()) {
+					// update changes to localStorage
+					localStorage.setItem("SudokuOnline.used_number_pieces_arr_for_"+current_level_id, used_number_pieces_arr_for_current_level.toString());
+				}
 			}
 		}
 
@@ -909,6 +934,16 @@ VernonChuo.SudokuOnline = function()
 
 		return public_objects;
 	}();
+
+	function isLocalStorageEnabled() {
+	    try {
+	        sessionStorage.setItem("test_key","test_value");
+	        if (sessionStorage.getItem("test_key") == "test_value"){
+	            return true;
+	        }
+	    } catch (e) {};
+	    return false;
+	}
 
 	var public_objects =
 	{
