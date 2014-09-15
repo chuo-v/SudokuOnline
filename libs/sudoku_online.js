@@ -3,7 +3,7 @@ var VernonChuo = VernonChuo || {};
 VernonChuo.SudokuOnline = function()
 {
 	// stores the id of the level that is currently loaded
-	var current_level_id = "home",
+	var active_level_id = "home",
 
 	// stores the given numbers for the level currently loaded in array
 	// format, iterating through them by row; sudoku tiles that do not
@@ -71,22 +71,32 @@ VernonChuo.SudokuOnline = function()
 
 		function initializeUsedNumberPiecesArraysFromDataInLocalStorage() {
 			var current_level_id,
+				stored_data,
 				stored_used_number_pieces_arr_for_current_level,
 				used_number_pieces_arr_for_current_level;
 
 			for(var i = 1; i <= NUM_LEVELS; i++) {
 					current_level_id = "level_"+i;
-					stored_used_number_pieces_arr_for_current_level = localStorage.getItem("SudokuOnline.used_number_pieces_arr_for_"+current_level_id);
+					stored_data = localStorage.getItem("SudokuOnline.used_number_pieces_arr_for_"+current_level_id);
 					
-					if(!stored_used_number_pieces_arr_for_current_level) {
-						// if there is no corresponding number pieces array stored in localStorage
+					if(!stored_data) {
+						// if there is no corresponding data stored in localStorage
 						used_number_pieces_arr_for_current_level = LevelControl.getGivenNumbersArrForCurrentLevel(current_level_id);
 						localStorage.setItem("SudokuOnline.used_number_pieces_arr_for_"+current_level_id, used_number_pieces_arr_for_current_level.toString());
 					} else {
-						// if there is a corresponding number pieces array stored in localStorage
-						used_number_pieces_arr_for_current_level = stored_used_number_pieces_arr_for_current_level.split(",").map(Number);
+						// if there is corresponding data stored in localStorage
+						stored_used_number_pieces_arr_for_current_level = stored_data.split(",");
+						if(arrayOnlyContainsNumbers(stored_used_number_pieces_arr_for_current_level) && stored_used_number_pieces_arr_for_current_level.length == 81) {
+							// if data from local storage appears to not be corrupted
+							used_number_pieces_arr_for_current_level = stored_used_number_pieces_arr_for_current_level.map(Number);
+							checkIfLevelWasCompletedInAPreviousSession(current_level_id, used_number_pieces_arr_for_current_level);
+						} else {
+							// if data from local storage is corrupted
+							used_number_pieces_arr_for_current_level = LevelControl.getGivenNumbersArrForCurrentLevel(current_level_id);
+							localStorage.setItem("SudokuOnline.used_number_pieces_arr_for_"+current_level_id, used_number_pieces_arr_for_current_level.toString());
+						}
 					}
-
+					// set used number pieces array for current level
 					LevelControl.setUsedNumberPiecesArrForCurrentLevel(current_level_id, used_number_pieces_arr_for_current_level);
 				}
 		}
@@ -99,6 +109,13 @@ VernonChuo.SudokuOnline = function()
 				current_level_id = "level_"+i;
 				used_number_pieces_arr_for_current_level = LevelControl.getGivenNumbersArrForCurrentLevel(current_level_id);
 				LevelControl.setUsedNumberPiecesArrForCurrentLevel(current_level_id, used_number_pieces_arr_for_current_level);
+			}
+		}
+
+		function checkIfLevelWasCompletedInAPreviousSession(current_level_id, used_number_pieces_arr_for_current_level) {
+			if($.inArray(0, used_number_pieces_arr_for_current_level) == -1) {
+				$("#"+current_level_id).removeClass("incomplete_level");
+				$("#"+current_level_id).addClass("completed_level");
 			}
 		}
 
@@ -362,7 +379,7 @@ VernonChuo.SudokuOnline = function()
 
 		function loadLevel(level_id) {
 			// do nothing if player tries to load the same level
-			if(current_level_id == level_id) {
+			if(active_level_id == level_id) {
 				return;
 			}
 			
@@ -371,13 +388,13 @@ VernonChuo.SudokuOnline = function()
 
 		function executeLevelChange(level_id) {
 			$("#loading_div_content").html("");
-			if(current_level_id != "home") {
-				var current_level_num = current_level_id.substring("level_".length).toString();
+			if(active_level_id != "home") {
+				var current_level_num = active_level_id.substring("level_".length).toString();
 				$("#loading_div_content").html("<span class='loading_div_content_blue_text'>Your progress in level "+current_level_num+" has been saved. </span><br>");
 			}
 
-			$("#"+current_level_id).removeClass("selected_level");
-			current_level_id = level_id;
+			$("#"+active_level_id).removeClass("selected_level");
+			active_level_id = level_id;
 			$("#"+level_id).addClass("selected_level");
 
 			if(level_id == "home") {
@@ -699,10 +716,10 @@ VernonChuo.SudokuOnline = function()
 		var public_objects =
 		{
 			loadLevel : loadLevel,
-			clearBoard : clearBoard,
 			getGivenNumbersArrForCurrentLevel : getGivenNumbersArrForCurrentLevel,
 			setUsedNumberPiecesArrForCurrentLevel : setUsedNumberPiecesArrForCurrentLevel,
 			getUsedNumberPiecesArrForCurrentLevel : getUsedNumberPiecesArrForCurrentLevel,
+			clearBoard : clearBoard,
 			displayLoadingScreen : displayLoadingScreen
 		};
 
@@ -713,7 +730,7 @@ VernonChuo.SudokuOnline = function()
 	{
 		function determineAndExecutePlayerSelection(event) {
 			var dragged_unused_number_piece_number = getDraggedNumberPieceNumber(event.target.id),
-				used_number_pieces_arr_for_current_level = LevelControl.getUsedNumberPiecesArrForCurrentLevel(current_level_id),
+				used_number_pieces_arr_for_current_level = LevelControl.getUsedNumberPiecesArrForCurrentLevel(active_level_id),
 				active_tile_row_num = PlayerInteractivity.getActiveTileRowNum(event),
 				active_tile_column_num = PlayerInteractivity.getActiveTileColumnNum(event),
 				index_of_active_tile_in_given_tiles_arr = PlayerInteractivity.getIndexOfActiveTileInGivenTilesArr(active_tile_row_num, active_tile_column_num);
@@ -740,10 +757,10 @@ VernonChuo.SudokuOnline = function()
 					highlightActiveTileOrangeAsWarning(active_tile_row_num, active_tile_column_num);
 				}
 			}
-			displayMsgBoxIfLevelCompleted(used_number_pieces_arr_for_current_level);
+			checkIfLevelCompleted(used_number_pieces_arr_for_current_level);
 			if(isLocalStorageEnabled()) {
 				// update changes to localStorage
-				localStorage.setItem("SudokuOnline.used_number_pieces_arr_for_"+current_level_id, used_number_pieces_arr_for_current_level.toString());
+				localStorage.setItem("SudokuOnline.used_number_pieces_arr_for_"+active_level_id, used_number_pieces_arr_for_current_level.toString());
 			}
 		}
 
@@ -798,12 +815,15 @@ VernonChuo.SudokuOnline = function()
 				}
 
 				// update used_tiles_arr
-				var used_number_pieces_arr_for_current_level = LevelControl.getUsedNumberPiecesArrForCurrentLevel(current_level_id);
+				var used_number_pieces_arr_for_current_level = LevelControl.getUsedNumberPiecesArrForCurrentLevel(active_level_id);
 				used_number_pieces_arr_for_current_level[index_of_active_tile_in_given_tiles_arr] = 0;
+
+				// make udpates to assigned classes if needed
+				checkIfChangesWereMadeToACompletedLevel();
 
 				if(isLocalStorageEnabled()) {
 					// update changes to localStorage
-					localStorage.setItem("SudokuOnline.used_number_pieces_arr_for_"+current_level_id, used_number_pieces_arr_for_current_level.toString());
+					localStorage.setItem("SudokuOnline.used_number_pieces_arr_for_"+active_level_id, used_number_pieces_arr_for_current_level.toString());
 				}
 			}
 		}
@@ -904,12 +924,25 @@ VernonChuo.SudokuOnline = function()
 			},500);
 		}
 
-		function displayMsgBoxIfLevelCompleted(used_number_pieces_arr_for_current_level) {
+		function checkIfLevelCompleted(used_number_pieces_arr_for_current_level) {
 			if($.inArray(0, used_number_pieces_arr_for_current_level) == -1) {
+				// if level is complete
+				$("#"+active_level_id).addClass("completed_level");
+				$("#"+active_level_id).removeClass("incomplete_level");
 				displayLevelCompletedMsgBox();
 				setTimeout(function() {
 					hideLevelCompletedMsgBox();
 				}, 3000);
+			} else {
+				// if level is not complete, check if updates to assigned classes are required
+				checkIfChangesWereMadeToACompletedLevel();
+			}
+		}
+
+		function checkIfChangesWereMadeToACompletedLevel() {
+			if($("#"+active_level_id).hasClass("completed_level")) {
+				$("#"+active_level_id).addClass("incomplete_level");
+				$("#"+active_level_id).removeClass("completed_level");
 			}
 		}
 
@@ -943,6 +976,15 @@ VernonChuo.SudokuOnline = function()
 	        }
 	    } catch (e) {};
 	    return false;
+	}
+
+	function arrayOnlyContainsNumbers(arr) {
+		for(var i = 0; i < arr.length; i++) {
+			if(!$.isNumeric(arr[i])) {
+				return false;
+			}
+		}
+		return true;
 	}
 
 	var public_objects =
