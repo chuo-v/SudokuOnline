@@ -274,14 +274,19 @@ VernonChuo.SudokuOnline = function()
 			$("#level_completed_msgbox_wrapper").css({left: level_completed_msgbox_offset_left+"px", right: "auto", top: level_completed_msgbox_offset_top+"px", bottom: "auto"});
 
 			// position instruction popup button
-			var instruction_popup_button_offset_top = game_board_offset_top + 580,
-				instruction_popup_button_offset_left = information_box_offset_left + 125;
+			var instruction_popup_button_offset_top = game_board_offset_top + 585,
+				instruction_popup_button_offset_left = information_box_offset_left + 230;
 			$("#instruction_popup_button").css({top: instruction_popup_button_offset_top+"px", bottom: "auto", left: instruction_popup_button_offset_left+"px", right: "auto"});
 			
 			// position instruction popup
 			var instruction_popup_offset_top = game_board_offset_top - 5,
 				instruction_popup_offset_left = game_board_offset_left - 5;
 			$("#instruction_popup").css({top: instruction_popup_offset_top+"px", bottom: "auto", left: instruction_popup_offset_left+"px", right: "auto"});
+
+			// position level loaded display box
+			var level_display_box_offset_top = instruction_popup_button_offset_top - 5,
+				level_display_box_offset_left = information_box_offset_left + 25;
+			$("#level_display_box").css({top: level_display_box_offset_top+"px", bottom: "auto", left: level_display_box_offset_left+"px", right: "auto"});
 		}
 
 		function dragUnusedNumberPiece(event) {
@@ -1381,6 +1386,7 @@ VernonChuo.SudokuOnline = function()
 				displayLoadingScreen();
 				$("#home_page").css({left: "-99999px", right: "auto"});
 				$("#game_board_area").css({left: "0px", right: "auto"});
+				$("#level_display_box").html("Level "+new_level_num);
 				setGivenNumbersArrForCurrentLevel(level_id);
 				setupGameBoard(level_id);
 			}
@@ -1464,13 +1470,13 @@ VernonChuo.SudokuOnline = function()
 				case "level_31":
 					return [4,0,0,0,0,0,0,0,9,0,0,8,4,6,0,2,0,0,0,7,2,5,0,0,0,4,0,0,3,0,0,2,6,0,0,0,0,0,0,0,8,0,0,0,0,0,0,0,7,1,0,0,3,0,0,8,0,0,0,2,3,9,0,0,0,7,0,5,9,8,0,0,1,0,0,0,0,0,0,0,2];
 				case "level_32":
-					return [];
+					return [7,4,0,0,0,8,9,3,0,0,1,0,0,4,0,6,0,0,0,5,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,3,4,0,0,8,0,5,0,0,6,9,0,0,0,0,0,7,0,0,0,0,0,7,0,0,0,6,0,0,0,8,0,5,0,0,1,0,0,9,7,3,0,0,0,2,8];
 				case "level_33":
-					return [];
+					return [6,0,0,0,1,0,0,4,0,0,5,0,0,7,4,0,0,0,0,0,3,0,0,0,0,0,2,8,0,9,0,0,1,0,7,0,3,4,0,0,0,0,0,9,8,0,7,0,8,0,0,5,0,4,5,0,0,0,0,0,8,0,0,0,0,0,4,2,0,0,5,0,0,3,0,0,8,0,0,0,6];
 				case "level_34":
-					return [];
+					return [5,0,0,0,0,4,0,0,7,0,0,0,0,2,0,1,3,0,0,0,0,0,0,6,5,0,0,0,5,0,0,0,0,8,1,0,0,3,0,5,0,1,0,6,0,0,1,4,0,0,0,0,7,0,0,0,5,2,0,0,0,0,0,0,2,7,0,1,0,0,0,0,9,0,0,7,0,0,0,0,2];
 				case "level_35":
-					return [];
+					return [0,0,0,0,9,4,0,6,0,0,9,0,8,0,0,0,0,5,2,6,0,0,0,0,0,7,8,0,2,0,0,0,0,8,0,0,7,0,0,0,4,0,0,0,6,0,0,5,0,0,0,0,2,0,8,7,0,0,0,0,0,1,3,5,0,0,0,0,6,0,8,0,0,3,0,5,1,0,0,0,0];
 				case "level_36":
 					return [];
 				case "level_37":
