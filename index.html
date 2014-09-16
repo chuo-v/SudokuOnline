@@ -1354,14 +1354,14 @@
 				<div id="information_box">
 					<div class="information_box_title">Actions</div>
 					<div class="information_box_action">Drag</div>
-					<div class="information_box_action_description">To fill a sudoku tile with a number, drag any of the number pieces on the panel to the right of the game board on to an empty tile. You may replace a used number piece by dropping an unused number piece on it.</div>
+					<div class="information_box_action_description">To fill a sudoku tile with a number, drag any of the green number pieces on the panel to the right of the sudoku board on to an empty tile. You may replace a number piece by dropping another number piece on to it.</div>
 					<div class="information_box_action">Double Click</div>
-					<div class="information_box_action_description">To remove a number from a sudoku tile, double click on the number piece.</div>
+					<div class="information_box_action_description">To remove a number from a tile, double click on the number piece.</div>
 					<div class="information_box_title">Objects</div>
 					<div class="information_box_object">Given Numbers</div>
 					<div class="information_box_object_description">Given numbers are gray colored, and cannot be altered.</div>
 					<div class="information_box_object">Number Pieces</div>
-					<div class="information_box_object_description">Number pieces have green backgrounds and can be placed on sudoku tiles not occupied by a given number. A counter for the remaining number of times you can use a number piece is displayed to the right of each of the number pieces.</div>
+					<div class="information_box_object_description">Number pieces have green backgrounds and can be placed on tiles not occupied by a given number. A counter for the remaining number of times you can use a number piece is displayed to the right of each of the number pieces.</div>
 				</div>
 
 				<div id="level_display_box"></div>
@@ -1387,7 +1387,26 @@
 			</div>
 
 			<div id="instruction_popup">
-				<div id="instruction_popup_title">Instructions for Sudoku</div>
+				<div id="instruction_popup_content">
+					<div id="instruction_popup_title">Instructions</div>
+
+					<div class="instruction_popup_content_paragraph">
+						The 9x9 square sudoku board below this popup has 81 tiles (squares), and is divided into nine 3x3 square regions. Some of the tiles already have numbers filled in (let's call them <span class="instruction_popup_content_gray_text">given numbers</span>), and the rest start out as empty.
+					</div>
+
+					<div class="instruction_popup_content_paragraph">
+						The objective of a sudoku puzzle is to fill in the remaining empty tiles with numbers (from 1 to 9) such that each <span class="instruction_popup_content_blue_text">row</span>, <span class="instruction_popup_content_blue_text">column</span> and <span class="instruction_popup_content_blue_text">3x3 square region</span> does not contain more than once occurence of the same number. In other words, you can only a fill an empty tile with a number if the <span class="instruction_popup_content_blue_text">row</span>, the <span class="instruction_popup_content_blue_text">column</span> and the <span class="instruction_popup_content_blue_text">3x3 square region</span> the tile is in does not already contain that number.
+					</div>
+
+					<div class="instruction_popup_content_paragraph">
+						To fill a tile with a number, <span class="instruction_popup_content_purple_text">drag</span> the corresponding <span class="instruction_popup_content_green_text">green number piece</span> from the panel to the right of this popup and drop it on the tile. If the placement of the number piece is valid, the number piece will appear in the tile. If not, the tile will flash <span class="instruction_popup_content_orange_text">orange</span> to indicate that the corresponding number is already contained in at least one of the following: the <span class="instruction_popup_content_blue_text">row</span>, the <span class="instruction_popup_content_blue_text">column</span> or the <span class="instruction_popup_content_blue_text">3x3 square region</span> that the tile is in. If you try to place a number piece on a <span class="instruction_popup_content_gray_text">given number</span>, its tile will flash <span class="instruction_popup_content_red_text">red</span> to indicate that this action is not allowed.
+					</div>
+
+					<div class="instruction_popup_content_paragraph">
+						Note that there is a number to the right of each of the <span class="instruction_popup_content_green_text">green number pieces</span> on the panel to the right. This number is a counter for the remaining times you will have to use the corresponding number piece to complete the sudoku puzzle. For more information about how to <span class="instruction_popup_content_purple_text">replace</span> or <span class="instruction_popup_content_purple_text">remove</span> a number piece, please refer to the panel to the left of this popup.
+					</div>
+					
+				</div>
 			</div>
 		</div>
 

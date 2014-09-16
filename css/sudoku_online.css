@@ -85,7 +85,7 @@ body {
 #home_page_content {
 	position: relative;
 	top: 5%;
-	height: 1000px;
+	height: 600px;
 	min-width: 700px;
 	margin-left: 120px; margin-right: 120px;
 	font-size: 25px;
@@ -94,12 +94,11 @@ body {
 	position: relative;
 	width: 400px; height: 70px;
 	color: #4863A0;
-	border: 8px solid #4863A0;
+	border: 4px solid #4863A0;
 	border-radius: 20px;
 	margin-left: auto; margin-right: auto;
 	margin-bottom: 30px;
 	font-size: 50px;
-	font-weight: 700;
 	line-height: 70px;
 }
 .home_page_content_paragraph {
@@ -398,10 +397,49 @@ body {
 	z-index: 9;
 	display: none;
 }
+#instruction_popup_content {
+	position: relative;
+	width: 615px; height: 615px;
+	margin-left: auto; margin-right: auto;
+	margin-top: 20px; margin-bottom: 10px;
+}
 #instruction_popup_title {
 	font-size: 25px;
-	margin-top: 10px; margin-bottom: 10px;
+	margin-top: 10px; margin-bottom: 12px;
 }
+.instruction_popup_content_paragraph {
+	position: relative;
+	width: 100%;
+	margin-bottom: 22px;
+	font-size: 18px;
+	text-align: left;
+	line-height: 24px;
+}
+.instruction_popup_content_gray_text {
+	color: gray;
+	font-weight: 700;
+}
+.instruction_popup_content_blue_text {
+	color: #4863A0;
+	font-weight: 700;
+}
+.instruction_popup_content_purple_text {
+	color: purple;
+	font-weight: 700;
+}
+.instruction_popup_content_green_text {
+	color: green;
+	font-weight: 700;
+}
+.instruction_popup_content_orange_text {
+	color: orange;
+	font-weight: 700;
+}
+.instruction_popup_content_red_text {
+	color: red;
+	font-weight: 700;
+}
+
 #level_display_box {
 	position: absolute;
 	width: 180px; height: 50px;
