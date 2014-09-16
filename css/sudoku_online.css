@@ -82,11 +82,34 @@ body {
 	text-align: center;
 	left: -99999px;
 }
+#home_page_content {
+	position: relative;
+	top: 5%;
+	height: 1000px;
+	min-width: 700px;
+	margin-left: 120px; margin-right: 120px;
+	font-size: 25px;
+}
 #home_page_title {
-	position: absolute;
+	position: relative;
+	width: 400px; height: 70px;
+	color: #4863A0;
+	border: 8px solid #4863A0;
+	border-radius: 20px;
+	margin-left: auto; margin-right: auto;
+	margin-bottom: 30px;
+	font-size: 50px;
+	font-weight: 700;
+	line-height: 70px;
+}
+.home_page_content_paragraph {
+	position: relative;
 	width: 100%;
-	top: 10%;
-	font-size: 40px;
+	margin-bottom: 40px;
+}
+.home_page_content_emphasized_text {
+	color: green;
+	font-weight: 700;
 }
 
 #loading_div {
