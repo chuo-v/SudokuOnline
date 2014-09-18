@@ -33,13 +33,13 @@ VernonChuo.SudokuOnline = function()
 		var NUM_LEVELS = 1000;
 
 		function execute() {
-			hideNavigationPanel();
+			hideNavigationPanelItems();
 			
 			$("#loading_div_content").html("Loading Sudoku Online...");
 			LevelControl.displayLoadingScreen();
 			
 			displayHomePage();
-			displayNavigationPanel();
+			displayNavigationPanelItems();
 
 			PlayerInteractivity.repositionGameBoardArea();
 			$("#navigation_panel").slimScroll({height: "auto", size: "4px"});
@@ -53,12 +53,16 @@ VernonChuo.SudokuOnline = function()
 			$("#home_page").css({left: "0px", right: "auto"});
 		}
 
-		function hideNavigationPanel() {
+		function hideNavigationPanelItems() {
 			$("#navigation_panel_wrapper").css({left: "-99999px", right: "auto"});
+			$("#navigation_panel_home_button_wrapper").css({left: "-99999px", right: "auto"});
+			$("#navigation_panel_text_input_box_wrapper").css({left: "-99999px", right: "auto"});
 		}
 		
-		function displayNavigationPanel() {
+		function displayNavigationPanelItems() {
 			$("#navigation_panel_wrapper").css({left: "0px", right: "auto"});
+			$("#navigation_panel_home_button_wrapper").css({left: "0px", right: "auto"});
+			$("#navigation_panel_text_input_box_wrapper").css({left: "0px", right: "auto"});
 		}
 
 		function initializeUsedNumberPiecesArrays() {	
@@ -131,6 +135,7 @@ VernonChuo.SudokuOnline = function()
 	{
 		function attachAllEventHandlers() {
 			attachEventHandlersForNavigationPanelButtons();
+			attachEventHandlerForNavigationPanelTextInputBoxItems();
 			attachEventHandlerForClearBoardButton();
 			attachEventHandlerForInstructionPopupButton();
 			attachEventHandlerForWindowObject();
@@ -141,6 +146,27 @@ VernonChuo.SudokuOnline = function()
 				$("#"+value.id).click(function() {
 					LevelControl.loadLevel(value.id);
 				});
+			});
+		}
+		function attachEventHandlerForNavigationPanelTextInputBoxItems() {
+			$("#navigation_panel_text_input_box_wrapper").bind({
+				mouseover : function() {
+					$("#navigation_panel_text_input_box_hint").css({left: "100px"});
+				},
+				mouseout : function() {
+					$("#navigation_panel_text_input_box_hint").css({left: "-99999px"});	
+				}
+			});
+			$("#navigation_panel_text_input_box").bind({
+				keypress : function(event) {
+					LevelControl.checkTextInput(event);
+				},
+				mouseover : function() {
+					$("#navigation_panel_text_input_box_hint").css({left: "100px"});
+				},
+				mouseout : function() {
+					$("#navigation_panel_text_input_box_hint").css({left: "-99999px"});	
+				}
 			});
 		}
 		function attachEventHandlerForClearBoardButton() {
@@ -1908,9 +1934,9 @@ VernonChuo.SudokuOnline = function()
 				case "level_250":
 					return [0,8,0,0,1,6,0,0,0,0,0,3,0,2,0,0,7,0,2,0,0,0,0,0,8,0,0,8,0,6,0,0,2,0,9,0,0,5,2,0,0,0,7,6,0,0,9,0,4,0,0,2,0,5,0,0,1,0,0,0,0,0,7,0,6,0,0,4,0,3,0,0,0,0,0,6,9,0,0,8,0];
 				case "level_251":
-					return [];
+					return [0,4,1,0,9,0,0,8,0,0,0,0,1,0,0,0,0,0,0,7,5,0,2,3,0,0,0,9,0,3,0,4,0,0,0,0,0,2,4,0,8,0,6,7,0,0,0,0,0,3,0,8,0,4,0,0,0,3,5,0,9,1,0,0,0,0,0,0,2,0,0,0,0,1,0,0,7,0,2,6,0];
 				case "level_252":
-					return [];
+					return [0,9,5,1,0,0,0,0,0,1,0,0,0,0,0,9,0,8,0,0,4,0,9,0,5,0,6,0,0,0,6,0,5,0,3,0,0,0,6,0,0,0,8,0,0,0,5,0,9,0,2,0,0,0,5,0,1,0,3,0,4,0,0,9,0,7,0,0,0,0,0,3,0,0,0,0,0,7,6,8,0];
 				case "level_253":
 					return [];
 				case "level_254":
@@ -7498,6 +7524,25 @@ VernonChuo.SudokuOnline = function()
 			}
 		}
 
+		function checkTextInput(event) {
+			var key_pressed = event.keyCode || event.which;
+			if(key_pressed == 13) {
+				var input_value = $("#navigation_panel_text_input_box").val();
+				if(!$.isNumeric(input_value) || input_value < 1 || input_value > 250) {
+					displayTextInputBoxWarningForInvalidInput();
+				} else {
+					LevelControl.loadLevel("level_"+input_value);
+				}
+			}
+		}
+
+		function displayTextInputBoxWarningForInvalidInput() {
+			$("#navigation_panel_text_input_box").css({backgroundColor: "red"});
+			setTimeout(function() {
+				$("#navigation_panel_text_input_box").css({backgroundColor: "#FFFFFF"});
+			}, 300);
+		}
+
 		function displayLoadingScreen() {
 			$("#loading_div").css({display: "block"});
 			$("#loading_div_content").animate({opacity: "1"});
@@ -7516,6 +7561,7 @@ VernonChuo.SudokuOnline = function()
 			setUsedNumberPiecesArrForCurrentLevel : setUsedNumberPiecesArrForCurrentLevel,
 			getUsedNumberPiecesArrForCurrentLevel : getUsedNumberPiecesArrForCurrentLevel,
 			clearBoard : clearBoard,
+			checkTextInput : checkTextInput,
 			displayLoadingScreen : displayLoadingScreen
 		};
 
