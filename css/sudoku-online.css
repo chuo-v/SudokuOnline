@@ -409,7 +409,7 @@ body {
 }
 #level_completed_msgbox {
 	position: relative;
-	width: 600px; height: 300px;
+	width: 600px; height: 302px;
 	border: 4px solid green;
 	border-radius: 15px;
 	background-color: #FFFFFF;
@@ -419,9 +419,9 @@ body {
 #level_completed_msgbox_content {
 	position: relative;
 	width: 100%;
-	margin-top: 100px;
 	font-weight: 500;
 	font-size: 25px;
+	line-height: 295px;
 	text-align: center;
 }
 
