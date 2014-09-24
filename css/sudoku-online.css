@@ -129,11 +129,11 @@ body {
 }
 #home_page_wrapper {
 	position: absolute;
-	width: 850px; height: 800px;
+	width: 850px; height: 665px;
 	left: 0; right: 0;
 	top: 7%;
 	margin: auto;
-	font-size: 25px;
+	font-size: 23px;
 	border: 6px solid #4D6FAC;
 	border-radius: 10px;
 }
@@ -153,7 +153,7 @@ body {
 .home_page_content_paragraph {
 	position: relative;
 	width: 100%;
-	margin-bottom: 60px;
+	margin-bottom: 40px;
 }
 .home_page_content_emphasized_text {
 	color: green;
