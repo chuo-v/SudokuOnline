@@ -33,20 +33,23 @@ VernonChuo.SudokuOnline = function()
 		var NUM_LEVELS = 1000;
 
 		function execute() {
-			hideNavigationPanelItems();
-			
-			$("#loading_div_content").html("Loading Sudoku Online...");
-			LevelControl.displayLoadingScreen();
-			
-			displayHomePage();
-			displayNavigationPanelItems();
+			// only load app if device size meets minimum requirements
+			if(screen.width > 1000 && screen.height > 600) {
+				hideNavigationPanelItems();
+				
+				$("#loading_div_content").html("Loading Sudoku Online...");
+				LevelControl.displayLoadingScreen();
+				
+				displayHomePage();
+				displayNavigationPanelItems();
 
-			PlayerInteractivity.repositionGameBoardArea();
-			$("#navigation_panel").slimScroll({height: "auto", size: "4px"});
-			$("#home").addClass("selected_level");
-			
-			EventHandlers.attachAllEventHandlers();
-			initializeUsedNumberPiecesArrays();
+				PlayerInteractivity.repositionGameBoardArea();
+				$("#navigation_panel").slimScroll({height: "auto", size: "4px"});
+				$("#home").addClass("selected_level");
+				
+				EventHandlers.attachAllEventHandlers();
+				initializeUsedNumberPiecesArrays();
+			}
 		}
 		
 		function displayHomePage () {

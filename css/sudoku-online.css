@@ -179,7 +179,7 @@ body {
 	color: #4863A0;
 }
 .loading_div_content_gray_text {
-	color: gray;
+	color: #787878;
 }
 
 #game_board_area {
@@ -465,7 +465,7 @@ body {
 	line-height: 24px;
 }
 .instruction_popup_content_gray_text {
-	color: gray;
+	color: #C0C0C0;
 	font-weight: 700;
 }
 .instruction_popup_content_blue_text {
@@ -501,6 +501,19 @@ body {
 	line-height: 50px;
 }
 
+#screen_size_warning_popup {
+	position: absolute;
+	width: 850px; height: 80px;
+	left: 0; right: 0;
+	top: 0; bottom: 0;
+	margin: auto;
+	background-color: #F0F0F0;
+	font-size: 30px;
+	text-align: center;
+	z-index: 1000;
+	display: none;
+}
+
 footer {
 	position: fixed;
 	width: 100%;
@@ -510,10 +523,21 @@ footer {
 	padding: 10px;
 	font-size: 20px;
 	z-index: 15;
+	display: none;
 }
 a {
 	color: #4863A0;
 }
 a:visited {
 	color: #4863A0;
+}
+
+@media (max-device-width: 1000px), (max-device-height: 600px) {
+	#screen_size_warning_popup { display: block; }
+	#page_content { display: none; }
+	body { background-color: #F0F0F0; }
+}
+@media all and (min-device-width: 1000px) and (min-device-height: 600px) {
+	footer { display: block; }
+	body { background-color: transparent; }
 }
