@@ -34,7 +34,7 @@ VernonChuo.SudokuOnline = function()
 
 		function execute() {
 			// only load app if device size meets minimum requirements
-			if(screen.width > 1000 && screen.height > 600) {
+			if(screen.width > 1024 && screen.height > 768) {
 				hideNavigationPanelItems();
 				
 				$("#loading_div_content").html("Loading Sudoku Online...");
@@ -291,8 +291,8 @@ VernonChuo.SudokuOnline = function()
 
 	var PlayerInteractivity = function()
 	{
-		var GAME_BOARD_LENGTH = 630,
-			GAME_BOARD_TILE_LENGTH = 70,
+		var GAME_BOARD_LENGTH = 414,
+			GAME_BOARD_TILE_LENGTH = 46,
 			game_board_offset_left = 0,
 			game_board_offset_top = 0;
 
@@ -302,53 +302,51 @@ VernonChuo.SudokuOnline = function()
 
 			// do not allow the game board area to be repositioned horizontally or vertically
 			// if the window is resized to a size that is smaller than the minimum allowed width
-			// (1250px) or the minimum allowed height (700px), respectively
-			if(window_height < 700) {
-				window_height = 700;
+			// (940px) or the minimum allowed height (550px), respectively
+			if(window_height < 550) {
+				window_height = 550;
 			}
-			if(window_width < 1250) {
-				window_width = 1250;
+			if(window_width < 940) {
+				window_width = 940;
 			}
 
 			// position game board
-			var game_board_aggregate_border_width = 22,
-				offset_to_horizontally_center_game_board_area = 100;
-			game_board_offset_top = (window_height - GAME_BOARD_LENGTH) / 2 - game_board_aggregate_border_width;
+			var game_board_aggregate_border_width = 15,
+				offset_to_horizontally_center_game_board_area = 115,
+				offset_to_vertically_center_game_board_area = 40;
+			game_board_offset_top = (window_height - GAME_BOARD_LENGTH) / 2 - game_board_aggregate_border_width - offset_to_vertically_center_game_board_area;
 			game_board_offset_left = (window_width - GAME_BOARD_LENGTH) / 2 + game_board_aggregate_border_width + offset_to_horizontally_center_game_board_area;
 			$("#game_board").css({top: game_board_offset_top+"px", bottom: "auto", left: game_board_offset_left+"px", right: "auto"});
 
 			// position unused number pieces panel
-			var unused_number_pieces_panel_offset_left = game_board_offset_left + GAME_BOARD_LENGTH + game_board_aggregate_border_width;
-			$("#unused_number_pieces_panel").css({top: game_board_offset_top+"px", bottom: "auto", left: unused_number_pieces_panel_offset_left+"px", right: "auto"});
+			var unused_number_pieces_panel_offset_left = game_board_offset_left + GAME_BOARD_LENGTH + game_board_aggregate_border_width + 10,
+				unused_number_pieces_panel_offset_top = game_board_offset_top - 5;
+			$("#unused_number_pieces_panel").css({top: unused_number_pieces_panel_offset_top+"px", bottom: "auto", left: unused_number_pieces_panel_offset_left+"px", right: "auto"});
 
 			// position clear board button
-			var clear_board_button_offset_top = game_board_offset_top + 530;
+			var unused_number_pieces_panel_height_incl_borders = 425,
+				clear_board_button_offset_top = unused_number_pieces_panel_offset_top + unused_number_pieces_panel_height_incl_borders + 10;
 			$("#clear_board_button").css({top: clear_board_button_offset_top+"px", bottom: "auto", left: unused_number_pieces_panel_offset_left+"px", right: "auto"});
 			
 			// position information box
-			var information_box_width_incl_padding = 300, game_board_left_border_and_margin_width = 15,
+			var information_box_width_incl_padding = 270, game_board_left_border_and_margin_width = 20,
 				information_box_offset_left = game_board_offset_left - information_box_width_incl_padding - game_board_left_border_and_margin_width;
-			$("#information_box").css({top: game_board_offset_top+"px", bottom: "auto", left: information_box_offset_left+"px", right: "auto"});
-
-			// position level completed message box so that it is centered on the game board when
-			// it is displayed
-			var level_completed_msgbox_offset_left = game_board_offset_left + 15,
-				level_completed_msgbox_offset_top = game_board_offset_top + 160;
-			$("#level_completed_msgbox_wrapper").css({left: level_completed_msgbox_offset_left+"px", right: "auto", top: level_completed_msgbox_offset_top+"px", bottom: "auto"});
+			$("#information_box").css({top: unused_number_pieces_panel_offset_top+"px", bottom: "auto", left: information_box_offset_left+"px", right: "auto"});
 
 			// position instruction popup button
-			var instruction_popup_button_offset_top = game_board_offset_top + 585,
-				instruction_popup_button_offset_left = information_box_offset_left + 230;
+			var instruction_popup_button_width = 25,
+				instruction_popup_button_offset_top = unused_number_pieces_panel_offset_top + 10,
+				instruction_popup_button_offset_left = information_box_offset_left + information_box_width_incl_padding - instruction_popup_button_width - 15;
 			$("#instruction_popup_button").css({top: instruction_popup_button_offset_top+"px", bottom: "auto", left: instruction_popup_button_offset_left+"px", right: "auto"});
 			
 			// position instruction popup
-			var instruction_popup_offset_top = game_board_offset_top - 5,
-				instruction_popup_offset_left = game_board_offset_left - 5;
-			$("#instruction_popup").css({top: instruction_popup_offset_top+"px", bottom: "auto", left: instruction_popup_offset_left+"px", right: "auto"});
+			var instruction_popup_offset_left = game_board_offset_left - 15;
+			$("#instruction_popup").css({top: unused_number_pieces_panel_offset_top+"px", bottom: "auto", left: instruction_popup_offset_left+"px", right: "auto"});
 
 			// position level loaded display box
-			var level_display_box_offset_top = instruction_popup_button_offset_top - 5,
-				level_display_box_offset_left = information_box_offset_left + 25;
+			var level_display_box_width_incl_borders = 184,
+				level_display_box_offset_top = game_board_offset_top + GAME_BOARD_LENGTH + game_board_aggregate_border_width,
+				level_display_box_offset_left = game_board_offset_left + ((GAME_BOARD_LENGTH - level_display_box_width_incl_borders) / 2);
 			$("#level_display_box").css({top: level_display_box_offset_top+"px", bottom: "auto", left: level_display_box_offset_left+"px", right: "auto"});
 		}
 
@@ -368,8 +366,8 @@ VernonChuo.SudokuOnline = function()
 		}
 
 		function centerActiveDraggableUnusedGamePieceAtCursor(event) {
-			var game_piece_center_x = event.pageX - 20,
-				game_piece_center_y = event.pageY - 20;
+			var game_piece_center_x = event.pageX - 15,
+				game_piece_center_y = event.pageY - 15;
 			$("#"+unused_number_piece_being_dragged_id).css({left: game_piece_center_x+"px", right: "auto", top: game_piece_center_y+"px", bottom: "auto"});
 		}
 
@@ -7528,7 +7526,7 @@ VernonChuo.SudokuOnline = function()
 				} else {
 					if(used_number_pieces_arr_for_current_level[i] != 0) {
 						$("#"+game_board_pieces_id_arr[i]).html(used_number_pieces_arr_for_current_level[i]);
-						$("#"+game_board_pieces_id_arr[i]).css({left: "5px", color: "#FFFFFF", backgroundColor: "green", cursor: "pointer"});
+						$("#"+game_board_pieces_id_arr[i]).css({left: "0px", color: "#FFFFFF", backgroundColor: "green", cursor: "pointer"});
 						// set counter of unused game pieces
 						var unused_number_piece_counter = $("#unused_number_piece_"+used_number_pieces_arr_for_current_level[i]+"_counter").html();
 						$("#unused_number_piece_"+used_number_pieces_arr_for_current_level[i]+"_counter").html(unused_number_piece_counter-1);
@@ -7543,7 +7541,7 @@ VernonChuo.SudokuOnline = function()
 			var given_number = given_numbers_arr_for_current_level[index];
 
 			$("#"+game_board_pieces_id_arr[index]).html(given_number);
-			$("#"+game_board_pieces_id_arr[index]).css({left: "5px", color: "#7E7E7E", backgroundColor: "#FFFFFF", cursor: "default"});
+			$("#"+game_board_pieces_id_arr[index]).css({left: "0px", color: "#7E7E7E", backgroundColor: "#FFFFFF", cursor: "default"});
 
 			// set counter of unused game pieces
 			var unused_number_piece_counter = $("#unused_number_piece_"+given_number+"_counter").html();
@@ -7628,7 +7626,7 @@ VernonChuo.SudokuOnline = function()
 					placeUnusedNumberPieceOnBoard(dragged_unused_number_piece_number, active_tile_row_num, active_tile_column_num, index_of_active_tile_in_given_tiles_arr);
 					// update and display the number piece in the active tile
 					$("#game_board_piece_"+active_tile_row_num+"_"+active_tile_column_num).html(dragged_unused_number_piece_number);
-					$("#game_board_piece_"+active_tile_row_num+"_"+active_tile_column_num).css({left: "5px", cursor: "pointer"});
+					$("#game_board_piece_"+active_tile_row_num+"_"+active_tile_column_num).css({left: "0px", cursor: "pointer"});
 					// update used number pieces array
 					used_number_pieces_arr_for_current_level[index_of_active_tile_in_given_tiles_arr] = dragged_unused_number_piece_number;
 				} else {
@@ -7826,11 +7824,11 @@ VernonChuo.SudokuOnline = function()
 
 		function displayLevelCompletedMsgBox() {
 			$("#level_completed_msgbox_wrapper").css({display: "block"});
-			$("#level_completed_msgbox").animate({opacity: "1"});
+			$("#level_completed_msgbox_wrapper").animate({opacity: "1"});
 		}
 
 		function hideLevelCompletedMsgBox() {
-			$("#level_completed_msgbox").animate({opacity: "0"});
+			$("#level_completed_msgbox_wrapper").animate({opacity: "0"});
 			setTimeout(function() {
 				$("#level_completed_msgbox_wrapper").css({display: "none"});
 			}, 1000);
