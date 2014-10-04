@@ -7514,7 +7514,7 @@ VernonChuo.SudokuOnline = function()
 			
 			// reset game board objects
 			$(".unused_number_piece_counter").html(9);
-			$(".game_board_piece").css({left: "-99999px", color: "#FFFFFF", backgroundColor: "green"});
+			$(".game_board_piece").css({left: "-99999px", right: "auto", color: "#FFFFFF", backgroundColor: "green"});
 
 			var used_number_pieces_arr_for_current_level = getUsedNumberPiecesArrForCurrentLevel(level_id);
 
@@ -7526,7 +7526,7 @@ VernonChuo.SudokuOnline = function()
 				} else {
 					if(used_number_pieces_arr_for_current_level[i] != 0) {
 						$("#"+game_board_pieces_id_arr[i]).html(used_number_pieces_arr_for_current_level[i]);
-						$("#"+game_board_pieces_id_arr[i]).css({left: "0px", color: "#FFFFFF", backgroundColor: "green", cursor: "pointer"});
+						$("#"+game_board_pieces_id_arr[i]).css({left: "0", right: "0", color: "#FFFFFF", backgroundColor: "green", cursor: "pointer"});
 						// set counter of unused game pieces
 						var unused_number_piece_counter = $("#unused_number_piece_"+used_number_pieces_arr_for_current_level[i]+"_counter").html();
 						$("#unused_number_piece_"+used_number_pieces_arr_for_current_level[i]+"_counter").html(unused_number_piece_counter-1);
@@ -7541,7 +7541,7 @@ VernonChuo.SudokuOnline = function()
 			var given_number = given_numbers_arr_for_current_level[index];
 
 			$("#"+game_board_pieces_id_arr[index]).html(given_number);
-			$("#"+game_board_pieces_id_arr[index]).css({left: "0px", color: "#7E7E7E", backgroundColor: "#FFFFFF", cursor: "default"});
+			$("#"+game_board_pieces_id_arr[index]).css({left: "0", right: "0", color: "#7E7E7E", backgroundColor: "#FFFFFF", cursor: "default"});
 
 			// set counter of unused game pieces
 			var unused_number_piece_counter = $("#unused_number_piece_"+given_number+"_counter").html();
@@ -7565,6 +7565,8 @@ VernonChuo.SudokuOnline = function()
 				if(!$.isNumeric(input_value) || input_value < 1 || input_value > 1000) {
 					displayTextInputBoxWarningForInvalidInput();
 				} else {
+					$("#navigation_panel_text_input_box_hint").css({left: "-99999px"});
+					$("#navigation_panel_text_input_box").val("");
 					LevelControl.loadLevel("level_"+input_value);
 				}
 			}
@@ -7626,7 +7628,7 @@ VernonChuo.SudokuOnline = function()
 					placeUnusedNumberPieceOnBoard(dragged_unused_number_piece_number, active_tile_row_num, active_tile_column_num, index_of_active_tile_in_given_tiles_arr);
 					// update and display the number piece in the active tile
 					$("#game_board_piece_"+active_tile_row_num+"_"+active_tile_column_num).html(dragged_unused_number_piece_number);
-					$("#game_board_piece_"+active_tile_row_num+"_"+active_tile_column_num).css({left: "0px", cursor: "pointer"});
+					$("#game_board_piece_"+active_tile_row_num+"_"+active_tile_column_num).css({left: "0", right: "0", cursor: "pointer"});
 					// update used number pieces array
 					used_number_pieces_arr_for_current_level[index_of_active_tile_in_given_tiles_arr] = dragged_unused_number_piece_number;
 				} else {
@@ -7680,7 +7682,7 @@ VernonChuo.SudokuOnline = function()
 			var index_of_active_tile_in_given_tiles_arr = PlayerInteractivity.getIndexOfActiveTileInGivenTilesArr(active_tile_row_num, active_tile_column_num); 
 			if(given_numbers_arr_for_current_level[index_of_active_tile_in_given_tiles_arr] == 0) {
 				// "remove" double clicked game piece
-				$("#game_board_piece_"+active_tile_row_num+"_"+active_tile_column_num).css({left: "-99999px"});
+				$("#game_board_piece_"+active_tile_row_num+"_"+active_tile_column_num).css({left: "-99999px", right: "auto"});
 
 				// increment counter of corresponding unused game piece
 				var removed_number_piece_number = $("#game_board_piece_"+active_tile_row_num+"_"+active_tile_column_num).html();

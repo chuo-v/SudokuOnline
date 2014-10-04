@@ -134,18 +134,17 @@ body {
 }
 #navigation_panel_text_input_box_hint {
 	position: absolute;
-	width: 280px; height: 60px;
-	left: -99999px;
-	top: 85%;
+	width: 220px; height: 40px;
+	left: -99999px; bottom: 31px;
 	color: #4863A0;
-	border: 4px solid #4863A0;
+	border: 2px solid #4863A0;
 	border-radius: 10px;
 	background-color: rgba(255,255,255,0.95);
 	padding-top: 7px; padding-bottom: 7px;
 	padding-left: 10px; padding-right: 10px;
-	font-size: 20px;
+	font-size: 16px;
 	text-align: center;
-	line-height: 30px;
+	line-height: 20px;
 	z-index: 20;
 }
 
@@ -219,8 +218,9 @@ body {
 }
 #game_board {
 	position: absolute;
-	width: 396px; height: 396px;
+	width: 416px; height: 416px;
 	background-color: rgba(100,100,100,0.2);
+	border: 3px solid #4863A0;
 }
 .game_board_tile {
 	position: absolute;
@@ -233,22 +233,26 @@ body {
 }
 .game_board_piece {
 	position: absolute;
-	left: -99999px; top: 0px;
-	width: 46px; height: 46px;
+	left: -99999px;
+	top: 0; bottom: 0;
+	width: 35px; height: 35px;
 	background-color: green;
+	margin: auto;
+	border-right: 2px solid #FFFFFF;
+	border-radius: 12px;
 	color: #FFFFFF;
 	text-align: center;
-	line-height: 46px;
-	font-size: 17px;
+	line-height: 35px;
+	font-size: 15px;
 	cursor: pointer;
 }
 .game_board_tile_row_1 {
 	top: 0px; bottom: auto;
-	border-top: 3px solid #4863A0;
+	border-top: 1px solid #4863A0;
 }
 .game_board_tile_column_1 {
 	left: 0px; right: auto;
-	border-left: 3px solid #4863A0;
+	border-left: 1px solid #4863A0;
 }
 .game_board_tile_row_2 {
 	top: 46px; bottom: auto;
@@ -308,11 +312,11 @@ body {
 }
 .game_board_tile_row_9 {
 	top: 368px; bottom: auto;
-	border-top: 1px solid #4863A0; border-bottom: 3px solid #4863A0;
+	border-top: 1px solid #4863A0; border-bottom: 1px solid #4863A0;
 }
 .game_board_tile_column_9 {
 	left: 368px; right: auto;
-	border-left: 1px solid #4863A0; border-right: 3px solid #4863A0;
+	border-left: 1px solid #4863A0; border-right: 1px solid #4863A0;
 }
 
 #unused_number_pieces_panel {
