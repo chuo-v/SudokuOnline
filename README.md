@@ -7,4 +7,4 @@ Sudoku Online
 * HTML/CSS/JS
 * Sudoku puzzles stored in arrays of length 81 (blank cells stored as 0's)
 * User progress in puzzles also stored in arrays of length 81, and is saved between different browser instances if localStorage is enabled
-* Sudoku number pieces are be dragged and dropped on to the sudoku board using plain JS/jQuery (thought about using jQuery UI's Draggable, but decided not to for the fun/experience of implmementing the functionality in plain JS/jQuery)
+* Sudoku number pieces are dragged and dropped on to the sudoku board using plain JS/jQuery (thought about using jQuery UI's Draggable, but decided not to for the fun/experience of implmementing the functionality in plain JS/jQuery)
