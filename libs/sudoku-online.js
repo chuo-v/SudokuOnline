@@ -7795,10 +7795,10 @@ VernonChuo.SudokuOnline = function()
 
 		function highlightActiveTileRedAsWarning(active_tile_row_num, active_tile_column_num) {
 			$("#game_board_tile_"+active_tile_row_num+"_"+active_tile_column_num).css({backgroundColor:"#CD2626"});
-			$("#game_board_piece_"+active_tile_row_num+"_"+active_tile_column_num).css({backgroundColor:"#CD2626", color: "#FFFFFF"});
+			$("#game_board_piece_"+active_tile_row_num+"_"+active_tile_column_num).css({backgroundColor:"#CD2626", borderRight: "2px solid #CD2626", borderBottom: "1px solid #CD2626", color: "#FFFFFF"});
 			setTimeout(function() {
 				$("#game_board_tile_"+active_tile_row_num+"_"+active_tile_column_num).css({backgroundColor:"#FFFFFF"});
-				$("#game_board_piece_"+active_tile_row_num+"_"+active_tile_column_num).css({backgroundColor:"#FFFFFF", color: "#7E7E7E"});
+				$("#game_board_piece_"+active_tile_row_num+"_"+active_tile_column_num).css({backgroundColor:"#FFFFFF", borderRight: "2px solid #FFFFFF", borderBottom: "1px solid #FFFFFF", color: "#7E7E7E"});
 			},500);
 		}
 

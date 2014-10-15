@@ -239,7 +239,8 @@ body {
 	background-color: green;
 	margin: auto;
 	border-right: 2px solid #FFFFFF;
-	border-radius: 12px;
+	border-bottom: 1px solid #FFFFFF;
+	border-radius: 14px;
 	color: #FFFFFF;
 	text-align: center;
 	line-height: 35px;
