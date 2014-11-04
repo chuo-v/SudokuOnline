@@ -340,7 +340,7 @@ VernonChuo.SudokuOnline = function()
 			$("#instruction_popup_button").css({top: instruction_popup_button_offset_top+"px", bottom: "auto", left: instruction_popup_button_offset_left+"px", right: "auto"});
 			
 			// position instruction popup
-			var instruction_popup_offset_left = game_board_offset_left - 15;
+			var instruction_popup_offset_left = game_board_offset_left - 13;
 			$("#instruction_popup").css({top: unused_number_pieces_panel_offset_top+"px", bottom: "auto", left: instruction_popup_offset_left+"px", right: "auto"});
 
 			// position level loaded display box
