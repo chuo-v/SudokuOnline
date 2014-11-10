@@ -26,7 +26,14 @@ VernonChuo.SudokuOnline = function()
 	// the corresponding unused number piece is faded in and this variable
 	// is then set to true, after which the application will not attempt
 	// to fade in the number piece again
-		is_draggable_unused_number_piece_displayed = false;
+		is_draggable_unused_number_piece_displayed = false,
+
+	// constants for the minimum screen width/height (in pixels)
+	// under which the application is not displayed and a relevant
+	// message is displayed to prompt the user to use a device with
+	// a larger screen to view this application
+		MIN_SCREEN_WIDTH = 1024,
+		MIN_SCREEN_HEIGHT = 768;
 
 	var init = function()
 	{
@@ -34,7 +41,7 @@ VernonChuo.SudokuOnline = function()
 
 		function execute() {
 			// only load app if device size meets minimum requirements
-			if(screen.width > 1024 && screen.height > 768) {
+			if(isNotAMobileDevice()) {
 				hideNavigationPanelItems();
 				
 				$("#loading_div_content").html("Loading Sudoku Online...");
@@ -7863,6 +7870,14 @@ VernonChuo.SudokuOnline = function()
 			}
 		}
 		return true;
+	}
+
+	/**
+	 * Returns true if the screen size of the user's device is larger
+	 * than a set threshold; false otherwise.
+	 */
+	function isNotAMobileDevice() {
+		return (screen.width > MIN_SCREEN_WIDTH && screen.height > MIN_SCREEN_HEIGHT);
 	}
 
 	var public_objects =
